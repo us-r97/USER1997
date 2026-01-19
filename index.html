@@ -10,7 +10,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-
     background: url("background.jpg") center / cover no-repeat fixed;
 }
 
@@ -18,112 +17,23 @@ body {
 .container {
     width: 800px;
     margin: 40px auto;
-    padding: 0;
-
-    background-color: rgba(230, 210, 120, 0.9); /* 바깥 패널 노랑 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(230, 210, 120, 0.9);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* ===== Section ===== */
+/* ===== Section Base ===== */
 .section {
     padding: 25px 30px;
-    background-color: rgba(20, 30, 70, 0.75); /* 진한 반투명 남색 */
-    color: #ffffff; /* 문자 백색 */
-}
-
-/* ===== Headings ===== */
-h1, h2 {
-    letter-spacing: 1px;
-}
-
-h2 {
-    margin: 0;
-    padding: 15px 30px;
-
-    background-color: rgba(220, 200, 100, 0.9); /* 제목 바 노랑 */
-    border-bottom: 2px solid rgba(60, 60, 60, 0.6);
-    color: #000;
-}
-
-/* ===== Lists ===== */
-ul {
-    list-style: square;
-    margin: 0;
-    padding-left: 20px;
-}
-
-/* ===== Profile ===== */
-.profile {
-    text-align: center;
-}
-
-.profile img {
-    width: 150px;
-    border-radius: 50%;
-}
-
-/* ===== Links ===== */
-a {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-a:hover {
-    color: #ffd84d;
-}
-
-/* ===== Footer ===== */
-footer {
-    text-align: center;
     color: #ffffff;
 }
-</style>
-</head>
 
-<body>
+/* 🔵 기본 설명란 (더 파란 남색) */
+.section-blue {
+    background-color: rgba(15, 35, 110, 0.8);
+}
 
-<div class="container">
-
-    <div class="profile section">
-        <img src="profile.jpg" alt="프로필 사진">
-        <h1>USER1997</h1>
-    </div>
-
-    <h2>📌 기본 정보</h2>
-    <div class="section">
-        <ul>
-            <li>이름: USER1997</li>
-            <li>이메일: jhjch1207@icloud.com</li>
-            <li>관심 분야: 전자제품, 테크노 음악</li>
-        </ul>
-    </div>
-
-    <h2>💡 자기소개</h2>
-    <div class="section">
-        어가나
-    </div>
-
-    <h2>🛠 보유 기술</h2>
-    <div class="section">
-        <ul>
-            <li>잘생긴 남자 따먹기</li>
-        </ul>
-    </div>
-
-    <h2>📞 연락처</h2>
-    <div class="section">
-        이메일: jhjch1207@icloud.com<br>
-        GitHub:
-        <a href="https://github.com/us-r97" target="_blank">
-            github.com/us-r97
-        </a>
-    </div>
-
-    <footer class="section">
-        © 2026 Made by USER1997
-    </footer>
-
-</div>
-
-</body>
-</html>
+/* 🟢 기본 정보 / 자기소개 (좌→우 녹색 그라데이션) */
+.section-green {
+    background: linear-gradient(
+        to right,
+        rgba(20, 90, 40, 0.
