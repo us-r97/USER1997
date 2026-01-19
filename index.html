@@ -5,8 +5,17 @@
 <title>내 소개 페이지</title>
 
 <style>
+/* 🔤 TTF 폰트 등록 */
+@font-face {
+    font-family: "RetroFont";
+    src: url("가을체.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전체 기본 설정 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* 본문은 기본 폰트 */
     margin: 0;
     padding: 0;
 
@@ -26,6 +35,12 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* 제목 바 (TTF 적용됨) */
+h1, h2 {
+    font-family: "RetroFont", Arial, sans-serif;
+    letter-spacing: 1.2px;
+}
+
 /* 섹션 제목 바 */
 h2 {
     margin: 0;
@@ -39,6 +54,7 @@ h2 {
     padding: 25px 30px;
 }
 
+/* 프로필 */
 .profile {
     text-align: center;
 }
@@ -46,10 +62,6 @@ h2 {
 .profile img {
     width: 150px;
     border-radius: 50%;
-}
-
-h1 {
-    margin-top: 10px;
 }
 
 ul {
