@@ -17,22 +17,29 @@
     background-attachment: fixed;  /* 스크롤해도 고정 */
 }
 
-     .container {
+   .container {
     width: 800px;
     margin: 40px auto;
-    background-color: rgba(120, 160, 120, 0.85); /* 레트로 그린 */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    background-color: rgba(230, 210, 120, 0.9); /* 레트로 노란색 */
+    padding: 0; /* 구분선이 끝까지 가게 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.section {
+    padding: 25px 30px;
 }
 
         h1 {
             text-align: center;
         }
-        h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
+       h2 {
+    margin: 0;
+    padding: 15px 30px;
+    border-bottom: 2px solid rgba(60, 60, 60, 0.6);
+    background-color: rgba(220, 200, 100, 0.9); /* 살짝 다른 노랑 */
+}
+
+        
         ul {
             list-style: square;
         }
@@ -52,45 +59,19 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="profile">
-        <!-- 프로필 이미지 -->
-        <img src="profile.jpg" alt="프로필 사진">
-        <h1>USER1997</h1>
-        <p></p>
-    </div>
-
-    <h2>📌 기본 정보</h2>
+<h2>📌 기본 정보</h2>
+<div class="section">
     <ul>
         <li>이름: USER1997</li>
         <li>이메일: jhjch1207@icloud.com</li>
         <li>관심 분야: 전자제품, 테크노 음악</li>
     </ul>
-
-    <h2>💡 자기소개</h2>
-    <p>
-        어가나
-    </p>
-
-    <h2>🛠 보유 기술</h2>
-    <ul>
-        <li>잘생긴 남자 따먹기</li>
-        
-    </ul>
-
-    <h2>📞 연락처</h2>
-    <p>
-        이메일: jhjch1207@icloud.com<br>
-        GitHub: <a href="https://github.com/us-r97" target="_blank">github.com/us-r97</a>
-    </p>
-
-    <footer>
-        © 2026 Made by USER1997
-    </footer>
 </div>
+
 
 </body>
 </html>
+
 
 
 
