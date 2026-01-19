@@ -13,40 +13,46 @@ body {
     background: url("background.jpg") center / cover no-repeat fixed;
 }
 
-/* ===== Layout ===== */
+/* ===== Layout (XP 패널 블루) ===== */
 .container {
     width: 800px;
     margin: 40px auto;
 
-    /* 🔵 회색 → 남색 톤으로 변경 */
-    background-color: rgba(25, 40, 85, 0.85);
+    /* 🟦 XP Luna 패널 블루 */
+    background-color: rgba(214, 227, 245, 0.95);
 
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.35);
 }
 
-/* ===== Section (모든 설명 란 통일) ===== */
+/* ===== Section (XP 내부 영역) ===== */
 .section {
     padding: 25px 30px;
+
+    /* 🟦 XP 내부 남색 */
+    background-color: rgba(58, 110, 165, 0.75);
+
     color: #ffffff;
-    background-color: rgba(15, 35, 110, 0.55);
 }
 
 /* ===== Headings ===== */
 h1, h2 {
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
 }
 
-/* 🟢 제목 바 : 녹색 그라데이션 (좌 → 우) */
+/* 🟢 XP 스타일 녹색 타이틀바 (좌 → 우) */
 h2 {
     margin: 0;
     padding: 15px 30px;
+
     color: #ffffff;
+
     background: linear-gradient(
         to right,
-        rgba(20, 90, 40, 0.9),
-        rgba(80, 170, 110, 0.9)
+        #6B8E23,   /* XP Olive Green */
+        #9ACD32
     );
-    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+
+    border-bottom: 2px solid rgba(0, 0, 0, 0.35);
 }
 
 /* ===== Lists ===== */
@@ -73,7 +79,7 @@ a {
 }
 
 a:hover {
-    color: #a8ffcc;
+    color: #ffff99; /* XP 느낌 옐로 하이라이트 */
 }
 
 /* ===== Footer ===== */
