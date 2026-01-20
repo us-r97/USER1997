@@ -2,10 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>My Profile</title>
+<title>USER1997 - My Profile</title>
 
 <style>
-/* ===== Base ===== */
 html { -webkit-font-smoothing: none; }
 
 body {
@@ -16,44 +15,7 @@ body {
     cursor: url("cursor.cur"), default;
 }
 
-/* ===== Splash ===== */
-#splash {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(#4a6fa5, #2e4f80);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.splash-box {
-    width: 320px;
-    padding: 25px;
-    background: #d4d7dc;
-    border: 2px solid #ffffff;
-    color: #000;
-    text-align: center;
-}
-
-.progress {
-    height: 14px;
-    margin-top: 15px;
-    background: #9aa3ad;
-    border: 1px solid #6b7076;
-}
-
-.progress span {
-    display: block;
-    height: 100%;
-    width: 0;
-    background: linear-gradient(to right, #ffffff, #4aa3ff);
-    animation: load 1.5s forwards;
-}
-
-@keyframes load { to { width: 100%; } }
-
-/* ===== XP WINDOW FRAME (single border) ===== */
+/* ===== XP Window ===== */
 .xp-window {
     max-width: 900px;
     margin: 40px auto;
@@ -63,9 +25,15 @@ body {
         inset 1px 1px 0 #ffffff,
         inset -1px -1px 0 #a0a4a8,
         0 8px 20px rgba(0,0,0,0.45);
+    transition: filter 0.2s, opacity 0.2s;
 }
 
-/* ===== Top Bar (no divider) ===== */
+.xp-window.inactive {
+    filter: saturate(0.85);
+    opacity: 0.96;
+}
+
+/* ===== Topbar ===== */
 #topbar {
     display: flex;
     align-items: center;
@@ -90,6 +58,12 @@ body {
     border: 1px solid #7a7f85;
 }
 
+.title-text {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 6px;
+}
+
 .address-bar {
     flex: 1;
     background: #ffffff;
@@ -100,7 +74,7 @@ body {
     overflow: hidden;
 }
 
-/* ===== Content Area ===== */
+/* ===== Content ===== */
 .xp-content {
     padding: 14px;
     background: #cfd3d7;
@@ -116,10 +90,12 @@ body {
     padding: 25px 30px;
     background: rgba(85,90,95,0.45);
     color: #ffffff;
+    border: 1px solid transparent;
 }
 
 .section:hover {
     background: rgba(95,100,105,0.55);
+    border-color: rgba(255,255,255,0.4);
 }
 
 /* ===== Titles ===== */
@@ -163,37 +139,54 @@ h2 {
     text-decoration: none;
 }
 
-/* ===== Status Bar (merged) ===== */
+/* ===== Status Bar ===== */
 .xp-status {
-    height: 18px;
+    height: 22px;
     background: linear-gradient(#e6e6e6, #cfd3d7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    font-size: 11px;
 }
 
-/* ===== Footer ===== */
-footer {
-    text-align: center;
-    font-size: 13px;
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-icon {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(#4aa3ff, #1c5fa8);
+    border-radius: 2px;
+}
+
+.status-text {
+    color: #000;
+}
+
+.status-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 </style>
 </head>
 
 <body>
 
-<div id="splash">
-    <div class="splash-box">
-        Loading profile...
-        <div class="progress"><span></span></div>
-    </div>
-</div>
-
 <audio id="clickSound" src="click.wav" preload="auto"></audio>
+<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 
-<div class="xp-window">
+<div class="xp-window" id="xpWindow">
 
     <div id="topbar" class="active">
         <div class="top-btn">◀</div>
         <div class="top-btn">▶</div>
         <div class="top-btn">⟳</div>
+        <div class="title-text">USER1997 - My Profile</div>
         <div class="address-bar" id="addressBar"></div>
     </div>
 
@@ -222,8 +215,10 @@ footer {
             <div class="section">
                 <strong>Email:</strong> jhjch1207@icloud.com<br>
                 <strong>GitHub:</strong><br>
-                <a class="xp-button" href="https://github.com/us-r1997" target="_blank">
-                    github.com/us-r1997
+                <a class="xp-button link"
+                   href="https://github.com/us-r1997"
+                   target="_blank">
+                   github.com/us-r1997
                 </a><br><br>
                 <strong>Discord:</strong> us_r1997
                 <div>Visitor count: <span id="count">0001</span></div>
@@ -236,32 +231,81 @@ footer {
         </div>
     </div>
 
-    <div class="xp-status"></div>
+    <div class="xp-status">
+        <div class="status-left">
+            <div class="status-icon"></div>
+            <span class="status-text" id="statusText">Ready</span>
+        </div>
+        <div class="status-right">
+            <span id="sessionTime">00:00</span>
+            <span id="clock">00:00</span>
+        </div>
+    </div>
+
 </div>
 
 <script>
+/* Address */
 addressBar.textContent = location.href;
 
+/* Window focus */
 window.addEventListener("focus", () => {
     topbar.className = "active";
+    xpWindow.classList.remove("inactive");
 });
 window.addEventListener("blur", () => {
     topbar.className = "inactive";
+    xpWindow.classList.add("inactive");
 });
 
-window.addEventListener("load", () => {
-    setTimeout(() => splash.style.display = "none", 1500);
-    let c = localStorage.getItem("visitCount") || 0;
-    c++;
-    localStorage.setItem("visitCount", c);
-    count.textContent = String(c).padStart(4, "0");
-});
-
+/* Click sound + BGM (first interaction) */
+let bgmStarted = false;
 document.addEventListener("click", () => {
     clickSound.currentTime = 0;
     clickSound.volume = 0.35;
     clickSound.play();
+
+    if (!bgmStarted) {
+        bgm.volume = 0.15;
+        bgm.play();
+        bgmStarted = true;
+    }
 });
+
+/* Visitor count */
+let c = localStorage.getItem("visitCount") || 0;
+c++;
+localStorage.setItem("visitCount", c);
+count.textContent = String(c).padStart(4, "0");
+
+/* Status hover */
+document.querySelectorAll(".link").forEach(link => {
+    link.addEventListener("mouseenter", () => {
+        statusText.textContent = "Opening " + link.href;
+    });
+    link.addEventListener("mouseleave", () => {
+        statusText.textContent = "Ready";
+    });
+});
+
+/* Session timer */
+let sec = 0;
+setInterval(() => {
+    sec++;
+    const m = String(Math.floor(sec / 60)).padStart(2, "0");
+    const s = String(sec % 60).padStart(2, "0");
+    sessionTime.textContent = m + ":" + s;
+}, 1000);
+
+/* Clock */
+function updateClock() {
+    const d = new Date();
+    const h = String(d.getHours()).padStart(2, "0");
+    const m = String(d.getMinutes()).padStart(2, "0");
+    clock.textContent = h + ":" + m;
+}
+updateClock();
+setInterval(updateClock, 60000);
 </script>
 
 </body>
