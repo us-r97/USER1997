@@ -28,6 +28,12 @@ body {
     background-color: rgba(85, 90, 95, 0.45);
     color: #ffffff;
     border-top: 1px solid rgba(255,255,255,0.2);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.section:hover {
+    background-color: rgba(95, 100, 105, 0.55);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
 /* ===== Headings ===== */
@@ -72,6 +78,13 @@ ul {
     height: 150px;
     object-fit: cover;
     border: 2px solid rgba(255,255,255,0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+.profile img:hover {
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.6),
+        0 0 8px rgba(255,255,255,0.4);
 }
 
 .profile h1 {
@@ -88,6 +101,41 @@ a {
 
 a:hover {
     color: #dddddd;
+}
+
+/* ===== XP Button ===== */
+.xp-button {
+    display: inline-block;
+    padding: 4px 10px;
+    margin-top: 4px;
+    background: linear-gradient(
+        to bottom,
+        #f3f3f3 0%,
+        #d6d6d6 50%,
+        #bfc3c7 100%
+    );
+    color: #000000;
+    border: 1px solid #7a7f85;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 1px 0 rgba(0,0,0,0.25);
+}
+
+.xp-button:hover {
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #e0e0e0 50%,
+        #c8ccd0 100%
+    );
+}
+
+.xp-button:active {
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.35);
 }
 
 /* ===== Footer ===== */
@@ -132,10 +180,13 @@ footer {
     <h2>📞 Contact</h2>
     <div class="section">
         <strong>Email:</strong> jhjch1207@icloud.com<br>
-        <strong>GitHub:</strong>
-        <a href="https://github.com/us-r1997" target="_blank" rel="noopener">
-            github.com/us-r1997
-        </a><br>
+        <strong>GitHub:</strong><br>
+        <a class="xp-button"
+           href="https://github.com/us-r1997"
+           target="_blank"
+           rel="noopener">
+           github.com/us-r1997
+        </a><br><br>
         <strong>Discord:</strong> us_r1997
     </div>
 
