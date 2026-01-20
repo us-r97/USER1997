@@ -5,46 +5,21 @@
 <title>My Profile</title>
 
 <style>
-/* ===== XP Font Tuning ===== */
+/* ===== XP Font ===== */
 html {
     -webkit-font-smoothing: none;
-    -moz-osx-font-smoothing: auto;
 }
 
 body {
     margin: 0;
-    padding: 0;
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
     font-size: 14px;
-    letter-spacing: 0.2px;
     background: url("background.jpg") center / cover no-repeat fixed;
-    overflow-x: hidden;
     cursor: url("cursor.cur"), default;
 }
 
-a, button, .xp-button {
+a, button {
     cursor: url("cursor-link.cur"), pointer;
-}
-
-/* ===== Scanline ===== */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(255,255,255,0.015),
-        rgba(255,255,255,0.015) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    animation: scan 8s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes scan {
-    from { background-position: 0 0; }
-    to   { background-position: 0 200px; }
 }
 
 /* ===== Splash ===== */
@@ -62,8 +37,7 @@ body::before {
     width: 320px;
     padding: 25px;
     background: #d4d7dc;
-    border: 2px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border: 2px solid #fff;
     color: #000;
     text-align: center;
 }
@@ -79,8 +53,8 @@ body::before {
     display: block;
     height: 100%;
     width: 0;
-    background: linear-gradient(to right, #ffffff, #4aa3ff);
-    animation: load 1.5s linear forwards;
+    background: linear-gradient(to right, #fff, #4aa3ff);
+    animation: load 1.5s forwards;
 }
 
 @keyframes load { to { width: 100%; } }
@@ -91,100 +65,86 @@ body::before {
     margin-top: 20px;
 }
 
-/* ===== Top Bar ===== */
+/* ===== Topbar ===== */
 #topbar {
     max-width: 800px;
     width: 90%;
     margin: 0 auto;
     padding: 6px;
     display: flex;
-    align-items: center;
     gap: 6px;
     border: 1px solid #7a7f85;
-    box-shadow: inset 0 1px 0 #ffffff;
-    transition: background 0.2s ease;
+    box-shadow: inset 0 1px 0 #fff;
+    transition: background 0.2s;
 }
 
-/* Active / Inactive */
 #topbar.active {
     background: linear-gradient(#f3f3f3, #cfd3d7);
 }
 
 #topbar.inactive {
-    background: linear-gradient(#d4d7dc, #aeb4ba);
+    background: linear-gradient(#d4d7dc, #b5bac0);
 }
 
 .top-btn {
     padding: 2px 8px;
-    background: linear-gradient(#ffffff, #c6cbd0);
-    border: 1px solid #7a7f85;
     font-size: 12px;
+    background: linear-gradient(#fff, #c6cbd0);
+    border: 1px solid #7a7f85;
 }
 
 .address-bar {
     flex: 1;
-    background: #ffffff;
+    background: #fff;
     border: 1px solid #7a7f85;
     padding: 3px 6px;
     font-size: 12px;
-    color: #000;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
-/* ===== Main Layout ===== */
+/* ===== Layout ===== */
 .xp-main {
     display: flex;
     justify-content: center;
 }
 
+/* SIDE UI toned down */
 .xp-side {
-    width: 120px;
-    background: linear-gradient(#e3e6ea, #c6cbd0);
-    border-left: 1px solid #7a7f85;
-    border-right: 1px solid #ffffff;
+    width: 48px;
+    background: #d9dde2;
 }
 
-.xp-side.left { border-left: none; }
-.xp-side.right { border-right: none; }
-
-/* ===== Content ===== */
 .container {
     max-width: 800px;
     width: 90%;
-    background-color: rgba(210, 215, 220, 0.95);
+    background: rgba(210,215,220,0.95);
     box-shadow: 0 6px 15px rgba(0,0,0,0.35);
 }
 
+/* ===== Sections ===== */
 .section {
     padding: 25px 30px;
-    background-color: rgba(85, 90, 95, 0.45);
-    color: #ffffff;
+    background: rgba(85,90,95,0.45);
+    color: #fff;
 }
 
 .section:hover {
-    background-color: rgba(95, 100, 105, 0.55);
+    background: rgba(95,100,105,0.55);
 }
 
 /* ===== Titles ===== */
-h1, h2 {
-    letter-spacing: 0.4px;
-}
-
 h2 {
     margin: 20px 0 0;
     padding: 15px 30px;
     background: linear-gradient(
         to right,
-        #ffffff 0%,
-        #e6e6e6 25%,
-        #c6cbd0 55%,
-        #aeb4ba 75%,
-        #dfe3e7 100%
+        #fff,
+        #e6e6e6,
+        #c6cbd0,
+        #dfe3e7
     );
     color: #000;
-    border-top: 1px solid #fff;
     border-bottom: 2px solid #7a7f85;
 }
 
@@ -206,30 +166,23 @@ h2 {
     font-size: 26px;
 }
 
-/* ===== Buttons ===== */
+/* ===== Button ===== */
 .xp-button {
-    display: inline-block;
     padding: 4px 10px;
     background: linear-gradient(#f3f3f3, #bfc3c7);
-    color: #000;
     border: 1px solid #7a7f85;
+    color: #000;
     text-decoration: none;
 }
 
-/* ===== Status Bar ===== */
+/* ===== Status Bar (empty) ===== */
 .xp-status {
     max-width: 800px;
+    height: 18px;
     margin: 0 auto;
-    height: 22px;
     background: linear-gradient(#e6e6e6, #cfd3d7);
     border: 1px solid #7a7f85;
     border-top: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
-    font-size: 11px;
-    color: #000;
 }
 
 /* ===== Footer ===== */
@@ -244,7 +197,7 @@ footer {
 
 <div id="splash">
     <div class="splash-box">
-        <strong>Loading profile...</strong>
+        Loading profile...
         <div class="progress"><span></span></div>
     </div>
 </div>
@@ -261,12 +214,12 @@ footer {
     </div>
 
     <div class="xp-main">
-        <div class="xp-side left"></div>
+        <div class="xp-side"></div>
 
         <div class="container">
 
             <div class="profile section">
-                <img src="profile.jpg" alt="Profile">
+                <img src="profile.jpg">
                 <h1>USER1997</h1>
             </div>
 
@@ -291,9 +244,7 @@ footer {
                     github.com/us-r1997
                 </a><br><br>
                 <strong>Discord:</strong> us_r1997
-                <div class="counter">
-                    Visitor count: <span id="count">0001</span>
-                </div>
+                <div>Visitor count: <span id="count">0001</span></div>
             </div>
 
             <footer class="section">
@@ -302,52 +253,37 @@ footer {
 
         </div>
 
-        <div class="xp-side right"></div>
+        <div class="xp-side"></div>
     </div>
 
-    <div class="xp-status">
-        <span>Done</span>
-        <span>Internet</span>
-    </div>
+    <div class="xp-status"></div>
 
 </div>
 
 <script>
-/* Splash */
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-    }, 1500);
-
-    let count = localStorage.getItem("visitCount") || 0;
-    count++;
-    localStorage.setItem("visitCount", count);
-    document.getElementById("count").textContent =
-        String(count).padStart(4, "0");
-});
-
-/* Address sync */
 document.getElementById("addressBar").textContent = location.href;
 
-/* XP click sound */
-document.addEventListener("click", () => {
-    const s = document.getElementById("clickSound");
-    s.currentTime = 0;
-    s.volume = 0.35;
-    s.play();
-});
-
-/* Topbar focus change */
-const topbar = document.getElementById("topbar");
-
 window.addEventListener("focus", () => {
-    topbar.classList.remove("inactive");
-    topbar.classList.add("active");
+    topbar.className = "active";
 });
 
 window.addEventListener("blur", () => {
-    topbar.classList.remove("active");
-    topbar.classList.add("inactive");
+    topbar.className = "inactive";
+});
+
+window.addEventListener("load", () => {
+    setTimeout(() => splash.style.display = "none", 1500);
+
+    let c = localStorage.getItem("visitCount") || 0;
+    c++;
+    localStorage.setItem("visitCount", c);
+    count.textContent = String(c).padStart(4, "0");
+});
+
+document.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.35;
+    clickSound.play();
 });
 </script>
 
