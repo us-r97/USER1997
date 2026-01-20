@@ -15,7 +15,8 @@ body {
 
 /* ===== Layout ===== */
 .container {
-    width: 800px;
+    max-width: 800px;
+    width: 90%;
     margin: 40px auto;
     background-color: rgba(210, 215, 220, 0.95);
     box-shadow: 0 6px 15px rgba(0,0,0,0.35);
@@ -26,6 +27,7 @@ body {
     padding: 25px 30px;
     background-color: rgba(85, 90, 95, 0.45);
     color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 /* ===== Headings ===== */
@@ -35,7 +37,7 @@ h1, h2 {
 
 /* ===== XP Silver Gradient Title Bar ===== */
 h2 {
-    margin: 0;
+    margin: 20px 0 0;
     padding: 15px 30px;
     background: linear-gradient(
         to right,
@@ -69,8 +71,13 @@ ul {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 0;
     border: 2px solid rgba(255,255,255,0.6);
+}
+
+.profile h1 {
+    margin: 0;
+    font-size: 28px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
 }
 
 /* ===== Links ===== */
@@ -86,6 +93,7 @@ a:hover {
 /* ===== Footer ===== */
 footer {
     text-align: center;
+    font-size: 14px;
 }
 </style>
 </head>
@@ -95,7 +103,7 @@ footer {
 <div class="container">
 
     <div class="profile section">
-        <img src="profile.jpg" alt="Profile photo">
+        <img src="profile.jpg" alt="USER1997 profile photo">
         <h1>USER1997</h1>
     </div>
 
@@ -125,7 +133,7 @@ footer {
     <div class="section">
         <strong>Email:</strong> jhjch1207@icloud.com<br>
         <strong>GitHub:</strong>
-        <a href="https://github.com/us-r97" target="_blank">
+        <a href="https://github.com/us-r1997" target="_blank" rel="noopener">
             github.com/us-r1997
         </a><br>
         <strong>Discord:</strong> us_r1997
@@ -139,4 +147,3 @@ footer {
 
 </body>
 </html>
-
