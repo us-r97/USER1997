@@ -88,23 +88,21 @@ body {
     border: 1px solid #7a7f85;
     padding: 3px 6px;
     font-size: 12px;
+    transition: background 0.3s;
 }
 
 /* ===== Content ===== */
 .xp-content {
     padding: 16px;
     background: #cfd3d7;
-    transition: height 0.3s ease, opacity 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
-.xp-content.minimized {
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    opacity: 0;
+.xp-content.fade {
+    opacity: 0.3;
 }
 
-/* ===== Profile & Sections (원본 유지) ===== */
+/* ===== Profile / Sections ===== */
 .profile {
     display: flex;
     align-items: center;
@@ -147,12 +145,9 @@ ul {
     padding-left: 20px;
 }
 
-a {
-    color: #ffffff;
-    text-decoration: underline;
-}
+a { color:#fff; }
 
-/* ===== Status Bar ===== */
+/* ===== Status ===== */
 .xp-status {
     height: 22px;
     background: linear-gradient(#e6e6e6, #cfd3d7);
@@ -165,8 +160,8 @@ a {
 
 .status-left {
     display: flex;
-    align-items: center;
     gap: 6px;
+    align-items: center;
 }
 
 .status-led {
@@ -176,17 +171,18 @@ a {
     border: 1px solid #0a5a0a;
 }
 
-/* ===== Exit ===== */
-#exitMessage {
+/* ===== Exit Overlay ===== */
+#exitOverlay {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: rgba(0,0,0,0.6);
     color: #fff;
     font-size: 20px;
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 10000;
+    transition: background 1s ease;
 }
 </style>
 </head>
@@ -195,153 +191,129 @@ a {
 
 <div id="bootScreen">
     <div>Starting USER1997...</div>
-    <div class="boot-bar">
-        <div class="boot-progress" id="bootProgress"></div>
-    </div>
+    <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
 </div>
 
 <div class="xp-window" id="xpWindow">
 
-    <div class="xp-caption">
-        <span>USER1997 - My Profile</span>
-        <div class="caption-buttons">
-            <button id="minBtn">_</button>
-            <button id="maxBtn">□</button>
-            <button id="closeBtn">×</button>
-        </div>
+<div class="xp-caption">
+    <span>USER1997 - My Profile</span>
+    <div class="caption-buttons">
+        <button id="minBtn">_</button>
+        <button id="maxBtn">□</button>
+        <button id="closeBtn">×</button>
+    </div>
+</div>
+
+<div id="topbar">
+    <div class="top-btn">◀</div>
+    <div class="top-btn">▶</div>
+    <div class="top-btn" id="refreshBtn">⟳</div>
+    <div class="address-bar" id="addressBar"></div>
+</div>
+
+<div class="xp-content" id="content">
+    <div class="profile">
+        <img src="profile.jpg">
+        <h1>USER1997</h1>
     </div>
 
-    <div id="topbar">
-        <div class="top-btn">◀</div>
-        <div class="top-btn">▶</div>
-        <div class="top-btn" id="refreshBtn">⟳</div>
-        <div class="address-bar" id="addressBar"></div>
+    <h2>📌 Information</h2>
+    <div class="section">
+        <ul>
+            <li>Username: USER1997</li>
+            <li>Interests: Electronics, 90s Korean techno music, handsome boys</li>
+            <li>Languages: Korean, English, Chinese</li>
+            <li>Location: South Korea</li>
+        </ul>
     </div>
 
-    <!-- ===== CONTENT (네가 쓴 것 그대로) ===== -->
-    <div class="xp-content" id="content">
+    <h2>💡 Bio</h2>
+    <div class="section">어가나</div>
 
-        <div class="profile">
-            <img src="profile.jpg" alt="Profile photo">
-            <h1>USER1997</h1>
-        </div>
+    <h2>🛠 Blank</h2>
+    <div class="section"><ul><li>Blank</li></ul></div>
 
-        <h2>📌 Information</h2>
-        <div class="section">
-            <ul>
-                <li>Username: USER1997</li>
-                <li>Interests: Electronics, 90s Korean techno music, handsome boys</li>
-                <li>Languages: Korean, English, Chinese</li>
-                <li>Location: South Korea</li>
-            </ul>
-        </div>
-
-        <h2>💡 Bio</h2>
-        <div class="section">
-            어가나
-        </div>
-
-        <h2>🛠 Blank</h2>
-        <div class="section">
-            <ul>
-                <li>Blank</li>
-            </ul>
-        </div>
-
-        <h2>📞 Contact</h2>
-        <div class="section">
-            <strong>Email:</strong> jhjch1207@icloud.com<br>
-            <strong>GitHub:</strong>
-            <a href="https://github.com/us-r1997" target="_blank">github.com/us-r1997</a><br>
-            <strong>Discord:</strong> us_r1997
-        </div>
-
-        <div class="section" style="text-align:center;">
-            © 2026 Made by USER1997
-        </div>
-
+    <h2>📞 Contact</h2>
+    <div class="section">
+        <strong>Email:</strong> jhjch1207@icloud.com<br>
+        <strong>GitHub:</strong> <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
+        <strong>Discord:</strong> us_r1997
     </div>
 
-    <!-- ===== STATUS ===== -->
-    <div class="xp-status">
-        <div class="status-left">
-            <div class="status-led"></div>
-            <span id="statusText">Ready</span>
-            <span id="onlineTime"></span>
-        </div>
-        <span id="clock"></span>
+    <div class="section" style="text-align:center;">© 2026 Made by USER1997</div>
+</div>
+
+<div class="xp-status">
+    <div class="status-left">
+        <div class="status-led" id="led"></div>
+        <span id="statusText">Ready</span>
+        <span id="onlineTime"></span>
     </div>
+    <span id="clock"></span>
+</div>
 
 </div>
 
-<div id="exitMessage">Saving settings...</div>
+<div id="exitOverlay">Saving settings...</div>
 
 <script>
 addressBar.textContent = location.href;
 
 /* Boot */
-let p = 0;
-const boot = setInterval(() => {
-    p += 10;
-    bootProgress.style.width = p + "%";
-    if (p >= 100) {
-        clearInterval(boot);
-        bootScreen.style.display = "none";
-        xpWindow.style.display = "block";
-    }
-}, 150);
+let p=0;
+const boot=setInterval(()=>{
+    p+=10; bootProgress.style.width=p+"%";
+    if(p>=100){clearInterval(boot);bootScreen.style.display="none";xpWindow.style.display="block";}
+},150);
 
-/* ===== Online time (elapsed) ===== */
-const startTime = Date.now();
-function updateOnlineTime() {
-    const diff = Math.floor((Date.now() - startTime) / 1000);
-    const m = String(Math.floor(diff / 60)).padStart(2,"0");
-    const s = String(diff % 60).padStart(2,"0");
-    onlineTime.textContent = `Online: ${m}:${s}`;
-}
-updateOnlineTime();
-setInterval(updateOnlineTime, 1000);
+/* Online time */
+const start=Date.now();
+setInterval(()=>{
+    const d=Math.floor((Date.now()-start)/1000);
+    onlineTime.textContent=`Online: ${String(Math.floor(d/60)).padStart(2,"0")}:${String(d%60).padStart(2,"0")}`;
+},1000);
 
 /* Clock */
-function updateClock() {
-    const d = new Date();
-    clock.textContent =
-        String(d.getHours()).padStart(2,"0") + ":" +
-        String(d.getMinutes()).padStart(2,"0");
-}
-updateClock();
-setInterval(updateClock, 60000);
+setInterval(()=>{
+    const d=new Date();
+    clock.textContent=`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+},1000);
 
-/* Min / Max */
-let minimized = false;
-minBtn.onclick = () => {
-    if (!minimized) {
-        content.classList.add("minimized");
-        minimized = true;
-    }
-};
-maxBtn.onclick = () => {
-    if (minimized) {
-        content.classList.remove("minimized");
-        minimized = false;
-    }
-};
+/* Refresh effect */
+refreshBtn.onclick=()=>{
+    statusText.textContent="Refreshing...";
+    addressBar.style.background="#e0e0e0";
+    content.classList.add("fade");
 
-/* Fake Refresh */
-refreshBtn.onclick = () => {
-    statusText.textContent = "Refreshing...";
-    setTimeout(() => {
-        statusText.textContent = "Ready";
-    }, 1200);
+    let blink=true;
+    const ledBlink=setInterval(()=>{
+        led.style.opacity = blink ? "0.2" : "1";
+        blink=!blink;
+    },200);
+
+    setTimeout(()=>{
+        clearInterval(ledBlink);
+        led.style.opacity="1";
+        content.classList.remove("fade");
+        addressBar.style.background="#fff";
+        statusText.textContent="Ready";
+    },1000);
 };
 
 /* Exit */
-closeBtn.onclick = () => {
-    exitMessage.style.display = "flex";
-    setTimeout(() => {
-        exitMessage.textContent = "";
-        exitMessage.style.background = "#000";
-    }, 2000);
+closeBtn.onclick=()=>{
+    exitOverlay.style.display="flex";
+    exitOverlay.textContent="Saving settings...";
+    exitOverlay.style.background="rgba(0,0,0,0.6)";
+    setTimeout(()=>{
+        exitOverlay.textContent="Shutting down...";
+        exitOverlay.style.background="rgba(0,0,0,0.85)";
+    },1500);
+    setTimeout(()=>{
+        exitOverlay.textContent="";
+        exitOverlay.style.background="#000";
+    },3000);
 };
 </script>
 
