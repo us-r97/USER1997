@@ -6,6 +6,7 @@
 
 <style>
 html { -webkit-font-smoothing: none; }
+
 body {
     margin: 0;
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
@@ -53,7 +54,6 @@ body {
     display: none;
     box-shadow: 0 6px 12px rgba(0,0,0,0.35);
     font-size: 13px;
-    transition: filter 0.1s;
 }
 
 /* ===== Caption ===== */
@@ -93,7 +93,6 @@ body {
     background: linear-gradient(#ffffff, #c6cbd0);
     border: 1px solid #7a7f85;
     cursor: pointer;
-    color: #000;
 }
 
 .address-bar {
@@ -102,21 +101,22 @@ body {
     border: 1px solid #7a7f85;
     padding: 4px 8px;
     font-size: 12px;
-    color: #000;
 }
 
 /* ===== Content ===== */
 .xp-content {
     padding: 20px 32px;
     background: #cfd3d7;
-    color: #000;
-    transition: filter 0.15s;
+    transition: max-height 0.25s ease, opacity 0.15s, filter 0.15s;
+    max-height: 3000px;
+    overflow: hidden;
 }
 
 .xp-content.minimized {
-    height: 0;
-    padding: 0;
-    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 /* ===== Profile ===== */
@@ -138,11 +138,9 @@ body {
 .section {
     padding: 18px 28px;
     background-color: rgba(85, 90, 95, 0.45);
-    color: #000;
     margin-bottom: 12px;
     border: 1px solid transparent;
     transition: background 0.15s, border 0.15s;
-    font-size: 13px;
     line-height: 1.5;
 }
 
@@ -151,33 +149,26 @@ body {
     border: 1px solid #7a7f85;
 }
 
-/* Current Electronics 점 제거 */
-.no-bullets li { list-style: none; margin-bottom: 4px; }
+/* ===== Lists ===== */
+ul { list-style: none; padding-left: 0; }
+.no-bullets li { margin-bottom: 4px; }
 
-/* ===== XP Title with unified icon ===== */
+/* ===== Titles ===== */
 h2 {
     margin: 0;
     padding: 14px 30px;
     background: linear-gradient(to right,#ffffff 0%,#e6e6e6 25%,#c6cbd0 55%,#aeb4ba 75%,#dfe3e7 100%);
-    color: #000;
     border-bottom: 2px solid #7a7f85;
     font-size: 14px;
     letter-spacing: 0.5px;
 }
 
-.xp-icon { 
-    display: inline-block; 
-    width: 14px; 
-    font-weight: bold; 
+.xp-icon {
+    margin-right: 6px;
     color: #0a246a;
-    font-size: 14px;
 }
 
-ul { list-style: none; padding-left: 0; }
-li::before { content: ""; } 
-a { color: #0a246a; font-weight: bold; }
-
-/* ===== 강조된 곡 번호 ===== */
+/* ===== Song Code ===== */
 .song-code {
     font-weight: bold;
     color: #0a246a;
@@ -187,11 +178,11 @@ a { color: #0a246a; font-weight: bold; }
 /* ===== Contact + Footer ===== */
 .contact-section, .footer-note {
     padding: 20px 28px;
-    margin: 0;
     background-color: rgba(85,90,95,0.45);
     border: 1px solid transparent;
     transition: background 0.15s, border 0.15s;
 }
+
 .contact-section:hover, .footer-note:hover {
     background-color: rgba(105,110,115,0.65);
     border: 1px solid #7a7f85;
@@ -212,7 +203,6 @@ a { color: #0a246a; font-weight: bold; }
     display: flex;
     gap: 10px;
     align-items: center;
-    color: #000;
 }
 
 .status-led {
@@ -220,6 +210,14 @@ a { color: #0a246a; font-weight: bold; }
     height: 8px;
     background: radial-gradient(#3cff3c, #0f8a0f);
     border: 1px solid #0a5a0a;
+}
+
+/* ===== Refresh Blink ===== */
+.blink {
+    animation: blink 0.4s infinite;
+}
+@keyframes blink {
+    50% { opacity: 0.2; }
 }
 
 /* ===== Exit Overlay ===== */
@@ -237,14 +235,18 @@ a { color: #0a246a; font-weight: bold; }
 }
 </style>
 </head>
+
 <body>
 
 <div id="bootScreen">
     <div>Starting USER1997...</div>
-    <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
+    <div class="boot-bar">
+        <div class="boot-progress" id="bootProgress"></div>
+    </div>
 </div>
 
 <div class="xp-window" id="xpWindow">
+
     <div class="xp-caption">
         <span>USER1997 - My Profile</span>
         <div class="caption-buttons">
@@ -262,12 +264,16 @@ a { color: #0a246a; font-weight: bold; }
     </div>
 
     <div class="xp-content" id="content">
-        <div class="profile"><img src="profile.jpg"><h1>USER1997</h1></div>
 
-        <h2><span class="xp-icon">💠</span> Status</h2>
+        <div class="profile">
+            <img src="profile.jpg" alt="profile">
+            <h1>USER1997</h1>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>Status</h2>
         <div class="section">Let's Remix Techno Club</div>
 
-        <h2><span class="xp-icon">💠</span> Bio</h2>
+        <h2><span class="xp-icon">💠</span>Bio</h2>
         <div class="section">
             <ul>
                 <li><strong>Username:</strong> USER1997</li>
@@ -279,19 +285,21 @@ a { color: #0a246a; font-weight: bold; }
             </ul>
         </div>
 
-        <h2><span class="xp-icon">💠</span> Current Electronics</h2>
-        <div class="section no-bullets">
-            <li>Xiaomi Gaming Monitor G27i (Two monitors)</li>
-            <li>Xiaomi Desktop Speaker</li>
-            <li>Xiaomi Computer Monitor Light Bar</li>
-            <li>Xiaomi 12 Pro</li>
-            <li>Apple iPhone 16 Plus</li>
-            <li>Apple AirPods 4</li>
-            <li>Keychron K6 Pro</li>
-            <li>Razer DeathAdder V2 X HyperSpeed</li>
+        <h2><span class="xp-icon">💠</span>Current Electronics</h2>
+        <div class="section">
+            <ul class="no-bullets">
+                <li>Xiaomi Gaming Monitor G27i (Two monitors)</li>
+                <li>Xiaomi Desktop Speaker</li>
+                <li>Xiaomi Computer Monitor Light Bar</li>
+                <li>Xiaomi 12 Pro</li>
+                <li>Apple iPhone 16 Plus</li>
+                <li>Apple AirPods 4</li>
+                <li>Keychron K6 Pro</li>
+                <li>Razer DeathAdder V2 X HyperSpeed</li>
+            </ul>
         </div>
 
-        <h2><span class="xp-icon">💠</span> Favorite Songs (Kumyoung)</h2>
+        <h2><span class="xp-icon">💠</span>Favorite Songs (Kumyoung)</h2>
         <div class="section">
             <ul>
                 <li>Techno Club Vol.1 <span class="song-code">(97100)</span></li>
@@ -307,7 +315,7 @@ a { color: #0a246a; font-weight: bold; }
             </ul>
         </div>
 
-        <h2><span class="xp-icon">💠</span> Contact</h2>
+        <h2><span class="xp-icon">💠</span>Contact</h2>
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
             <strong>GitHub:</strong> <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
@@ -330,83 +338,102 @@ a { color: #0a246a; font-weight: bold; }
 <div id="exitOverlay">Saving settings...</div>
 
 <script>
+/* ===== DOM Cache ===== */
+const addressBar   = document.getElementById("addressBar");
+const bootScreen   = document.getElementById("bootScreen");
+const bootProgress = document.getElementById("bootProgress");
+const xpWindow     = document.getElementById("xpWindow");
+const content      = document.getElementById("content");
+const led          = document.getElementById("led");
+const statusText   = document.getElementById("statusText");
+const onlineTime   = document.getElementById("onlineTime");
+const clock        = document.getElementById("clock");
+const minBtn       = document.getElementById("minBtn");
+const maxBtn       = document.getElementById("maxBtn");
+const refreshBtn   = document.getElementById("refreshBtn");
+const closeBtn     = document.getElementById("closeBtn");
+const exitOverlay  = document.getElementById("exitOverlay");
+
 addressBar.textContent = location.href;
 
-/* Boot */
-let p=0;
-const boot=setInterval(()=>{
-    p+=10;
-    bootProgress.style.width=p+"%";
-    if(p>=100){
+/* ===== Boot ===== */
+let p = 0;
+const boot = setInterval(() => {
+    p += 10;
+    bootProgress.style.width = p + "%";
+    if (p >= 100) {
         clearInterval(boot);
-        bootScreen.style.display="none";
-        xpWindow.style.display="block";
+        bootScreen.style.display = "none";
+        xpWindow.style.display = "block";
         startOnlineCounter();
     }
-},150);
+}, 150);
 
-/* Online Counter */
+/* ===== Online Counter ===== */
 let onlineInterval, onlineStart;
-function startOnlineCounter(){
+function startOnlineCounter() {
     onlineStart = Date.now();
-    if(onlineInterval) clearInterval(onlineInterval);
-    onlineInterval = setInterval(()=>{
-        const s=Math.floor((Date.now()-onlineStart)/1000);
-        const m=String(Math.floor(s/60)).padStart(2,"0");
-        const sec=String(s%60).padStart(2,"0");
-        onlineTime.textContent=`Online: ${m}:${sec}`;
-    },1000);
+    if (onlineInterval) clearInterval(onlineInterval);
+    onlineInterval = setInterval(() => {
+        const s = Math.floor((Date.now() - onlineStart) / 1000);
+        const m = String(Math.floor(s / 60)).padStart(2, "0");
+        const sec = String(s % 60).padStart(2, "0");
+        onlineTime.textContent = `Online: ${m}:${sec}`;
+    }, 1000);
 }
 
-/* Clock */
-setInterval(()=>{
-    const d=new Date();
+/* ===== Clock ===== */
+setInterval(() => {
+    const d = new Date();
     clock.textContent =
-        String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
-},1000);
+        String(d.getHours()).padStart(2, "0") + ":" +
+        String(d.getMinutes()).padStart(2, "0");
+}, 1000);
 
-/* Min / Max */
-let minimized=false;
-minBtn.onclick=()=>{
-    if(!minimized){ content.classList.add("minimized"); minimized=true; }
+/* ===== Min / Max ===== */
+let minimized = false;
+minBtn.onclick = () => {
+    if (!minimized) {
+        content.classList.add("minimized");
+        minimized = true;
+    }
 };
-maxBtn.onclick=()=>{
-    if(minimized){ content.classList.remove("minimized"); minimized=false; }
-};
-
-/* Refresh with XP-like dark flash, 500ms duration */
-refreshBtn.onclick=()=>{
-    statusText.textContent="Refreshing...";
-    onlineStart = Date.now(); // reset counter
-    let on=true;
-    const blink=setInterval(()=>{
-        led.style.opacity=on?"0.2":"1";
-        on=!on;
-    },200);
-
-    const origFilter = content.style.filter;
-    content.style.filter="brightness(0.6)";
-    setTimeout(()=>{ content.style.filter=origFilter; },500); 
-
-    setTimeout(()=>{
-        clearInterval(blink);
-        led.style.opacity="1";
-        statusText.textContent="Ready";
-    },1200);
+maxBtn.onclick = () => {
+    if (minimized) {
+        content.classList.remove("minimized");
+        minimized = false;
+    }
 };
 
-/* Exit */
-closeBtn.onclick=()=>{
-    exitOverlay.style.display="flex";
-    exitOverlay.textContent="Saving settings...";
-    exitOverlay.style.background="rgba(0,0,0,0.6)";
-    setTimeout(()=>{
-        exitOverlay.textContent="Shutting down...";
-    },1200);
-    setTimeout(()=>{
-        exitOverlay.textContent="";
-        exitOverlay.style.background="#000";
-    },2400);
+/* ===== Refresh ===== */
+function xpRefresh() {
+    statusText.textContent = "Refreshing...";
+    onlineStart = Date.now();
+    led.classList.add("blink");
+    content.style.filter = "brightness(0.6)";
+
+    setTimeout(() => {
+        content.style.filter = "";
+    }, 500);
+
+    setTimeout(() => {
+        led.classList.remove("blink");
+        statusText.textContent = "Ready";
+    }, 1200);
+}
+refreshBtn.onclick = xpRefresh;
+
+/* ===== Exit ===== */
+closeBtn.onclick = () => {
+    exitOverlay.style.display = "flex";
+    exitOverlay.textContent = "Saving settings...";
+    setTimeout(() => {
+        exitOverlay.textContent = "Shutting down...";
+    }, 1200);
+    setTimeout(() => {
+        exitOverlay.textContent = "";
+        exitOverlay.style.background = "#000";
+    }, 2400);
 };
 </script>
 
