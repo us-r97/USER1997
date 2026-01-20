@@ -6,7 +6,6 @@
 
 <style>
 html { -webkit-font-smoothing: none; }
-
 body {
     margin: 0;
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
@@ -18,7 +17,7 @@ body {
 #bootScreen {
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255,0.8); /* 시작 시 반투명 흰색 */
+    background: rgba(255,255,255,0.8);
     color: #000;
     display: flex;
     flex-direction: column;
@@ -92,7 +91,7 @@ body {
     background: linear-gradient(#ffffff, #c6cbd0);
     border: 1px solid #7a7f85;
     cursor: pointer;
-    color: #000; /* 눈에 잘 보이도록 */
+    color: #000;
 }
 
 .address-bar {
@@ -108,7 +107,8 @@ body {
 .xp-content {
     padding: 20px 32px;
     background: #cfd3d7;
-    color: #000; /* 글자 통일 */
+    color: #000;
+    transition: background 0.15s;
 }
 
 .xp-content.minimized {
@@ -136,16 +136,12 @@ body {
 .section {
     padding: 20px 28px;
     background-color: rgba(85, 90, 95, 0.45);
-    color: #000; /* 본문 글자 색 통일 */
+    color: #000;
     margin-bottom: 0;
     border: 1px solid transparent;
     transition: background 0.15s, border 0.15s;
     font-size: 13px;
     line-height: 1.4;
-}
-
-.section + .section {
-    margin-top: 0;
 }
 
 .section:hover {
@@ -171,7 +167,6 @@ h2 {
     letter-spacing: 0.5px;
 }
 
-/* XP 아이콘 통일 */
 .xp-icon {
     display: inline-block;
     width: 14px;
@@ -187,7 +182,7 @@ ul {
 
 a { color: #0a246a; font-weight: bold; }
 
-/* ===== Contact + Footer (분리된 hover 효과) ===== */
+/* ===== Contact + Footer ===== */
 .contact-section, .footer-note {
     padding: 20px 28px;
     margin: 0;
@@ -216,7 +211,7 @@ a { color: #0a246a; font-weight: bold; }
     display: flex;
     gap: 10px;
     align-items: center;
-    color: #000; /* 글자 검정으로 */
+    color: #000;
 }
 
 .status-led {
@@ -381,6 +376,9 @@ maxBtn.onclick=()=>{
 refreshBtn.onclick=()=>{
     statusText.textContent="Refreshing...";
     let on=true;
+    const origBg = content.style.background;
+    content.style.background = "rgba(200,200,255,0.9)";
+    setTimeout(()=>{ content.style.background = origBg; },150);
     const blink=setInterval(()=>{
         led.style.opacity=on?"0.2":"1";
         on=!on;
