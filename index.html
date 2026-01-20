@@ -11,6 +11,7 @@ body {
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
     background: url("background.jpg") center / cover no-repeat fixed;
     color: #000;
+    transition: background 0.15s;
 }
 
 /* ===== Boot Screen ===== */
@@ -52,6 +53,7 @@ body {
     display: none;
     box-shadow: 0 6px 12px rgba(0,0,0,0.35);
     font-size: 13px;
+    transition: filter 0.1s;
 }
 
 /* ===== Caption ===== */
@@ -108,7 +110,7 @@ body {
     padding: 20px 32px;
     background: #cfd3d7;
     color: #000;
-    transition: background 0.15s;
+    transition: background 0.1s;
 }
 
 .xp-content.minimized {
@@ -153,33 +155,15 @@ body {
 h2 {
     margin: 0;
     padding: 14px 30px;
-    background: linear-gradient(
-        to right,
-        #ffffff 0%,
-        #e6e6e6 25%,
-        #c6cbd0 55%,
-        #aeb4ba 75%,
-        #dfe3e7 100%
-    );
+    background: linear-gradient(to right,#ffffff 0%,#e6e6e6 25%,#c6cbd0 55%,#aeb4ba 75%,#dfe3e7 100%);
     color: #000;
     border-bottom: 2px solid #7a7f85;
     font-size: 14px;
     letter-spacing: 0.5px;
 }
 
-.xp-icon {
-    display: inline-block;
-    width: 14px;
-    font-weight: bold;
-    color: #0a246a;
-}
-
-ul {
-    list-style: square;
-    margin: 0;
-    padding-left: 20px;
-}
-
+.xp-icon { display: inline-block; width: 14px; font-weight: bold; color: #0a246a; }
+ul { list-style: square; margin: 0; padding-left: 20px; }
 a { color: #0a246a; font-weight: bold; }
 
 /* ===== Contact + Footer ===== */
@@ -190,7 +174,6 @@ a { color: #0a246a; font-weight: bold; }
     border: 1px solid transparent;
     transition: background 0.15s, border 0.15s;
 }
-
 .contact-section:hover, .footer-note:hover {
     background-color: rgba(105,110,115,0.65);
     border: 1px solid #7a7f85;
@@ -236,18 +219,14 @@ a { color: #0a246a; font-weight: bold; }
 }
 </style>
 </head>
-
 <body>
 
 <div id="bootScreen">
     <div>Starting USER1997...</div>
-    <div class="boot-bar">
-        <div class="boot-progress" id="bootProgress"></div>
-    </div>
+    <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
 </div>
 
 <div class="xp-window" id="xpWindow">
-
     <div class="xp-caption">
         <span>USER1997 - My Profile</span>
         <div class="caption-buttons">
@@ -265,12 +244,7 @@ a { color: #0a246a; font-weight: bold; }
     </div>
 
     <div class="xp-content" id="content">
-
-        <div class="profile">
-            <img src="profile.jpg">
-            <h1>USER1997</h1>
-        </div>
-
+        <div class="profile"><img src="profile.jpg"><h1>USER1997</h1></div>
         <h2><span class="xp-icon">■</span> Information</h2>
         <div class="section">
             <ul>
@@ -280,24 +254,17 @@ a { color: #0a246a; font-weight: bold; }
                 <li>Location: South Korea</li>
             </ul>
         </div>
-
         <h2><span class="xp-icon">●</span> Bio</h2>
         <div class="section">어가나</div>
-
         <h2><span class="xp-icon">▲</span> Blank</h2>
         <div class="section"><ul><li>Blank</li></ul></div>
-
         <h2><span class="xp-icon">◆</span> Contact</h2>
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
             <strong>GitHub:</strong> <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
             <strong>Discord:</strong> us_r1997
         </div>
-
-        <div class="footer-note">
-            © 2026 Made by USER1997
-        </div>
-
+        <div class="footer-note">© 2026 Made by USER1997</div>
     </div>
 
     <div class="xp-status">
@@ -331,10 +298,12 @@ const boot=setInterval(()=>{
 },150);
 
 /* Online Counter */
+let onlineInterval, onlineStart;
 function startOnlineCounter(){
-    const start=Date.now();
-    setInterval(()=>{
-        const s=Math.floor((Date.now()-start)/1000);
+    onlineStart = Date.now();
+    if(onlineInterval) clearInterval(onlineInterval);
+    onlineInterval = setInterval(()=>{
+        const s=Math.floor((Date.now()-onlineStart)/1000);
         const m=String(Math.floor(s/60)).padStart(2,"0");
         const sec=String(s%60).padStart(2,"0");
         onlineTime.textContent=`Online: ${m}:${sec}`;
@@ -353,36 +322,33 @@ function updateVisitor(){
 setInterval(()=>{
     const d=new Date();
     clock.textContent =
-        String(d.getHours()).padStart(2,"0")+":"+
-        String(d.getMinutes()).padStart(2,"0");
+        String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
 },1000);
 
 /* Min / Max */
 let minimized=false;
 minBtn.onclick=()=>{
-    if(!minimized){
-        content.classList.add("minimized");
-        minimized=true;
-    }
+    if(!minimized){ content.classList.add("minimized"); minimized=true; }
 };
 maxBtn.onclick=()=>{
-    if(minimized){
-        content.classList.remove("minimized");
-        minimized=false;
-    }
+    if(minimized){ content.classList.remove("minimized"); minimized=false; }
 };
 
-/* Refresh */
+/* Refresh with XP-like flash */
 refreshBtn.onclick=()=>{
     statusText.textContent="Refreshing...";
+    onlineStart = Date.now(); // reset counter
     let on=true;
-    const origBg = content.style.background;
-    content.style.background = "rgba(200,200,255,0.9)";
-    setTimeout(()=>{ content.style.background = origBg; },150);
     const blink=setInterval(()=>{
         led.style.opacity=on?"0.2":"1";
         on=!on;
     },200);
+
+    // XP flash effect
+    const origBg = content.style.background;
+    content.style.filter="brightness(1.6)";
+    setTimeout(()=>{ content.style.filter=""; },150);
+
     setTimeout(()=>{
         clearInterval(blink);
         led.style.opacity="1";
