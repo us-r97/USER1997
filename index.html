@@ -110,7 +110,7 @@ body {
     padding: 20px 32px;
     background: #cfd3d7;
     color: #000;
-    transition: background 0.1s;
+    transition: filter 0.15s;
 }
 
 .xp-content.minimized {
@@ -334,7 +334,7 @@ maxBtn.onclick=()=>{
     if(minimized){ content.classList.remove("minimized"); minimized=false; }
 };
 
-/* Refresh with XP-like flash */
+/* Refresh with XP-like dark flash */
 refreshBtn.onclick=()=>{
     statusText.textContent="Refreshing...";
     onlineStart = Date.now(); // reset counter
@@ -344,10 +344,10 @@ refreshBtn.onclick=()=>{
         on=!on;
     },200);
 
-    // XP flash effect
-    const origBg = content.style.background;
-    content.style.filter="brightness(1.6)";
-    setTimeout(()=>{ content.style.filter=""; },150);
+    // XP dark flash effect
+    const origFilter = content.style.filter;
+    content.style.filter="brightness(0.6)";
+    setTimeout(()=>{ content.style.filter=origFilter; },150);
 
     setTimeout(()=>{
         clearInterval(blink);
