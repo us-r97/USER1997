@@ -174,6 +174,13 @@ ul { list-style: none; padding-left: 0; }
 li::before { content: ""; } /* 점 제거 */
 a { color: #0a246a; font-weight: bold; }
 
+/* ===== 강조된 곡 번호 ===== */
+.song-code {
+    font-weight: bold;
+    color: #0a246a;
+    margin-left: 4px;
+}
+
 /* ===== Contact + Footer ===== */
 .contact-section, .footer-note {
     padding: 20px 28px;
@@ -269,21 +276,20 @@ a { color: #0a246a; font-weight: bold; }
             </ul>
         </div>
 
-       <h2><span class="xp-icon">💠</span> Favorite Songs (Kumyoung)</h2>
-<div class="section">
-    <ul>
-        <li>Techno Club Vol.1 (97100)</li>
-        <li>Techno Club Vol.2 (97101)</li>
-        <li>Techno Club Vol.3 (97102)</li>
-        <li>Techno Club Vol.4 (97103)</li>
-        <li>Techno Club Vol.5 (97104)</li>
-        <li>Techno Club Vol.6 (97105)</li>
-        <li>Techno Club Vol.7 (97106)</li>
-        <li>Kwon Soyoung – Choice of Cinderella (6060)</li>
-        <li>Yoo Chaeyoung – Emotion (6061)</li>
-    </ul>
-</div>
-
+        <h2><span class="xp-icon">💠</span> Favorite Songs (Kumyoung)</h2>
+        <div class="section">
+            <ul>
+                <li>Techno Club Vol.1 <span class="song-code">(97100)</span></li>
+                <li>Techno Club Vol.2 <span class="song-code">(97101)</span></li>
+                <li>Techno Club Vol.3 <span class="song-code">(97102)</span></li>
+                <li>Techno Club Vol.4 <span class="song-code">(97103)</span></li>
+                <li>Techno Club Vol.5 <span class="song-code">(97104)</span></li>
+                <li>Techno Club Vol.6 <span class="song-code">(97105)</span></li>
+                <li>Techno Club Vol.7 <span class="song-code">(97106)</span></li>
+                <li>Kwon Soyoung – Choice of Cinderella <span class="song-code">(6060)</span></li>
+                <li>Yoo Chaeyoung – Emotion <span class="song-code">(6061)</span></li>
+            </ul>
+        </div>
 
         <h2><span class="xp-icon">💠</span> Contact</h2>
         <div class="contact-section">
@@ -400,6 +406,3 @@ closeBtn.onclick=()=>{
 
 </body>
 </html>
-
-
-
