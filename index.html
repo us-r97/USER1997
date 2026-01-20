@@ -15,7 +15,7 @@ body {
     cursor: url("cursor.cur"), default;
 }
 
-/* ===== XP Window ===== */
+/* ===== Window ===== */
 .xp-window {
     max-width: 900px;
     margin: 40px auto;
@@ -26,6 +26,7 @@ body {
         inset -1px -1px 0 #a0a4a8,
         0 8px 20px rgba(0,0,0,0.45);
     transition: filter 0.2s, opacity 0.2s;
+    overflow: hidden;
 }
 
 .xp-window.inactive {
@@ -33,22 +34,43 @@ body {
     opacity: 0.96;
 }
 
-/* ===== Topbar ===== */
+/* ===== Caption ===== */
+.xp-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    background: linear-gradient(#0a246a, #3a6ea5);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.caption-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.cap-btn {
+    width: 18px;
+    height: 16px;
+    background: linear-gradient(#f3f3f3, #bfc3c7);
+    border: 1px solid #000;
+    color: #000;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* ===== Toolbar ===== */
 #topbar {
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 6px;
-    box-shadow: inset 0 1px 0 #ffffff;
-    transition: background 0.2s;
-}
-
-#topbar.active {
     background: linear-gradient(#f3f3f3, #cfd3d7);
-}
-
-#topbar.inactive {
-    background: linear-gradient(#d4d7dc, #b5bac0);
 }
 
 .top-btn {
@@ -56,12 +78,6 @@ body {
     font-size: 12px;
     background: linear-gradient(#ffffff, #c6cbd0);
     border: 1px solid #7a7f85;
-}
-
-.title-text {
-    font-size: 12px;
-    font-weight: bold;
-    margin-right: 6px;
 }
 
 .address-bar {
@@ -78,38 +94,29 @@ body {
 .xp-content {
     padding: 14px;
     background: #cfd3d7;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.xp-content.minimized {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
 }
 
 .container {
     background: rgba(210,215,220,0.95);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.35);
 }
 
 /* ===== Sections ===== */
 .section {
     padding: 25px 30px;
     background: rgba(85,90,95,0.45);
-    color: #ffffff;
+    color: #fff;
     border: 1px solid transparent;
 }
 
 .section:hover {
-    background: rgba(95,100,105,0.55);
     border-color: rgba(255,255,255,0.4);
-}
-
-/* ===== Titles ===== */
-h2 {
-    margin: 20px 0 0;
-    padding: 15px 30px;
-    background: linear-gradient(
-        to right,
-        #ffffff,
-        #e6e6e6,
-        #c6cbd0,
-        #dfe3e7
-    );
-    color: #000;
 }
 
 /* ===== Profile ===== */
@@ -125,184 +132,110 @@ h2 {
     border: 2px solid rgba(255,255,255,0.6);
 }
 
-.profile h1 {
-    margin: 0;
-    font-size: 26px;
-}
-
-/* ===== Button ===== */
-.xp-button {
-    padding: 4px 10px;
-    background: linear-gradient(#f3f3f3, #bfc3c7);
-    border: 1px solid #7a7f85;
-    color: #000;
-    text-decoration: none;
-}
-
-/* ===== Status Bar ===== */
+/* ===== Status ===== */
 .xp-status {
     height: 22px;
     background: linear-gradient(#e6e6e6, #cfd3d7);
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 0 8px;
     font-size: 11px;
 }
 
-.status-left {
-    display: flex;
+/* ===== Exit Screen ===== */
+#exitScreen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #fff;
+    font-size: 20px;
     align-items: center;
-    gap: 6px;
-}
-
-.status-icon {
-    width: 12px;
-    height: 12px;
-    background: radial-gradient(#4aa3ff, #1c5fa8);
-    border-radius: 2px;
-}
-
-.status-text {
-    color: #000;
-}
-
-.status-right {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="clickSound" src="click.wav" preload="auto"></audio>
-<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<audio id="clickSound" src="click.wav"></audio>
+<audio id="bgm" src="bgm.mp3" loop></audio>
 
 <div class="xp-window" id="xpWindow">
 
-    <div id="topbar" class="active">
+    <div class="xp-caption" id="captionBar">
+        <span>USER1997 - My Profile</span>
+        <div class="caption-buttons">
+            <div class="cap-btn" id="minBtn">_</div>
+            <div class="cap-btn">□</div>
+            <div class="cap-btn" id="closeBtn">×</div>
+        </div>
+    </div>
+
+    <div id="topbar">
         <div class="top-btn">◀</div>
         <div class="top-btn">▶</div>
         <div class="top-btn">⟳</div>
-        <div class="title-text">USER1997 - My Profile</div>
         <div class="address-bar" id="addressBar"></div>
     </div>
 
-    <div class="xp-content">
+    <div class="xp-content" id="content">
         <div class="container">
-
             <div class="profile section">
                 <img src="profile.jpg">
                 <h1>USER1997</h1>
             </div>
 
-            <h2>📌 Information</h2>
-            <div class="section">
-                <ul>
-                    <li>Username: USER1997</li>
-                    <li>Interests: Electronics, 90s Korean techno music, handsome boys</li>
-                    <li>Languages: Korean, English, Chinese</li>
-                    <li>Location: South Korea</li>
-                </ul>
-            </div>
-
-            <h2>💡 Bio</h2>
             <div class="section">어가나</div>
-
-            <h2>📞 Contact</h2>
-            <div class="section">
-                <strong>Email:</strong> jhjch1207@icloud.com<br>
-                <strong>GitHub:</strong><br>
-                <a class="xp-button link"
-                   href="https://github.com/us-r1997"
-                   target="_blank">
-                   github.com/us-r1997
-                </a><br><br>
-                <strong>Discord:</strong> us_r1997
-                <div>Visitor count: <span id="count">0001</span></div>
-            </div>
-
-            <footer class="section">
-                © 2026 Made by USER1997
-            </footer>
-
         </div>
     </div>
 
     <div class="xp-status">
-        <div class="status-left">
-            <div class="status-icon"></div>
-            <span class="status-text" id="statusText">Ready</span>
-        </div>
-        <div class="status-right">
-            <span id="sessionTime">00:00</span>
-            <span id="clock">00:00</span>
-        </div>
+        <span id="statusText">Ready</span>
+        <span id="clock">00:00</span>
     </div>
+</div>
 
+<div id="exitScreen">
+    <div>Windows is shutting down...</div>
 </div>
 
 <script>
-/* Address */
 addressBar.textContent = location.href;
 
-/* Window focus */
-window.addEventListener("focus", () => {
-    topbar.className = "active";
-    xpWindow.classList.remove("inactive");
-});
-window.addEventListener("blur", () => {
-    topbar.className = "inactive";
-    xpWindow.classList.add("inactive");
-});
-
-/* Click sound + BGM (first interaction) */
-let bgmStarted = false;
+/* Sounds */
 document.addEventListener("click", () => {
     clickSound.currentTime = 0;
-    clickSound.volume = 0.35;
+    clickSound.volume = 0.3;
     clickSound.play();
 
-    if (!bgmStarted) {
+    if (bgm.paused) {
         bgm.volume = 0.15;
         bgm.play();
-        bgmStarted = true;
     }
 });
 
-/* Visitor count */
-let c = localStorage.getItem("visitCount") || 0;
-c++;
-localStorage.setItem("visitCount", c);
-count.textContent = String(c).padStart(4, "0");
+/* Minimize */
+let minimized = false;
+minBtn.onclick = () => {
+    minimized = !minimized;
+    content.classList.toggle("minimized", minimized);
+};
 
-/* Status hover */
-document.querySelectorAll(".link").forEach(link => {
-    link.addEventListener("mouseenter", () => {
-        statusText.textContent = "Opening " + link.href;
-    });
-    link.addEventListener("mouseleave", () => {
-        statusText.textContent = "Ready";
-    });
-});
-
-/* Session timer */
-let sec = 0;
-setInterval(() => {
-    sec++;
-    const m = String(Math.floor(sec / 60)).padStart(2, "0");
-    const s = String(sec % 60).padStart(2, "0");
-    sessionTime.textContent = m + ":" + s;
-}, 1000);
+/* Close */
+closeBtn.onclick = () => {
+    xpWindow.style.display = "none";
+    exitScreen.style.display = "flex";
+};
 
 /* Clock */
 function updateClock() {
     const d = new Date();
-    const h = String(d.getHours()).padStart(2, "0");
-    const m = String(d.getMinutes()).padStart(2, "0");
-    clock.textContent = h + ":" + m;
+    clock.textContent =
+        String(d.getHours()).padStart(2,"0") + ":" +
+        String(d.getMinutes()).padStart(2,"0");
 }
 updateClock();
 setInterval(updateClock, 60000);
