@@ -149,7 +149,6 @@ h2 {
     font-size: 14px;
 }
 
-/* XP icon */
 .xp-icon {
     display: inline-block;
     width: 14px;
@@ -165,6 +164,25 @@ ul {
 
 a { color: #ffffff; }
 
+/* ===== Contact + Footer Fusion ===== */
+.contact-wrap {
+    position: relative;
+}
+
+.footer-note {
+    margin-top: 2px;
+    font-size: 11px;
+    opacity: 0.9;
+    transition: all 0.15s;
+}
+
+.contact-wrap:hover .footer-note {
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.6);
+    opacity: 1;
+}
+
 /* ===== Status Bar ===== */
 .xp-status {
     height: 22px;
@@ -178,7 +196,7 @@ a { color: #ffffff; }
 
 .status-left {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
 }
 
@@ -255,12 +273,12 @@ a { color: #ffffff; }
         <div class="section"><ul><li>Blank</li></ul></div>
 
         <h2><span class="xp-icon">◆</span> Contact</h2>
-        <div class="section">
+        <div class="section contact-wrap">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
             <strong>GitHub:</strong>
             <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
-            <strong>Discord:</strong> us_r1997<br><br>
-            © 2026 Made by USER1997
+            <strong>Discord:</strong> us_r1997
+            <div class="footer-note">© 2026 Made by USER1997</div>
         </div>
 
     </div>
@@ -270,6 +288,7 @@ a { color: #ffffff; }
             <div class="status-led" id="led"></div>
             <span id="statusText">Ready</span>
             <span id="onlineTime"></span>
+            <span id="visitorCount"></span>
         </div>
         <span id="clock"></span>
     </div>
@@ -290,6 +309,7 @@ const boot=setInterval(()=>{
         bootScreen.style.display="none";
         xpWindow.style.display="block";
         startOnlineCounter();
+        updateVisitor();
     }
 },150);
 
@@ -304,10 +324,18 @@ function startOnlineCounter(){
     },1000);
 }
 
+/* Visitor Counter */
+function updateVisitor(){
+    let v = localStorage.getItem("visitors");
+    v = v ? parseInt(v)+1 : 1;
+    localStorage.setItem("visitors", v);
+    visitorCount.textContent = `Visitors: ${String(v).padStart(5,"0")}`;
+}
+
 /* Clock */
 setInterval(()=>{
     const d=new Date();
-    clock.textContent=
+    clock.textContent =
         String(d.getHours()).padStart(2,"0")+":"+
         String(d.getMinutes()).padStart(2,"0");
 },1000);
