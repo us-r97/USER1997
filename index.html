@@ -12,21 +12,25 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: url("background.jpg") center / cover no-repeat fixed;
     overflow-x: hidden;
+    cursor: url("cursor.cur"), default;
 }
 
-/* ===== Techno Overlay ===== */
+a, .xp-button {
+    cursor: url("cursor-link.cur"), pointer;
+}
+
+/* ===== Techno Scanline Overlay ===== */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,0.015),
-            rgba(255,255,255,0.015) 1px,
-            transparent 1px,
-            transparent 3px
-        );
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.015),
+        rgba(255,255,255,0.015) 1px,
+        transparent 1px,
+        transparent 3px
+    );
     animation: scan 8s linear infinite;
     pointer-events: none;
 }
@@ -100,12 +104,9 @@ body::before {
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
-/* ===== Headings ===== */
-h1, h2 {
-    letter-spacing: 0.6px;
-}
+/* ===== XP Silver Title ===== */
+h1, h2 { letter-spacing: 0.6px; }
 
-/* ===== XP Silver Gradient Title Bar ===== */
 h2 {
     margin: 20px 0 0;
     padding: 15px 30px;
@@ -117,17 +118,9 @@ h2 {
         #aeb4ba 75%,
         #dfe3e7 100%
     );
-    color: #000000;
-    border-top: 1px solid #ffffff;
+    color: #000;
+    border-top: 1px solid #fff;
     border-bottom: 2px solid #7a7f85;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-}
-
-/* ===== Lists ===== */
-ul {
-    list-style: square;
-    margin: 0;
-    padding-left: 20px;
 }
 
 /* ===== Profile ===== */
@@ -140,15 +133,7 @@ ul {
 .profile img {
     width: 150px;
     height: 150px;
-    object-fit: cover;
     border: 2px solid rgba(255,255,255,0.6);
-    transition: box-shadow 0.3s ease;
-}
-
-.profile img:hover {
-    box-shadow:
-        0 0 0 2px rgba(255,255,255,0.6),
-        0 0 8px rgba(255,255,255,0.4);
 }
 
 .profile h1 {
@@ -161,18 +146,18 @@ ul {
 .xp-button {
     display: inline-block;
     padding: 4px 10px;
-    margin-top: 4px;
-    background: linear-gradient(
-        to bottom,
-        #f3f3f3 0%,
-        #d6d6d6 50%,
-        #bfc3c7 100%
-    );
-    color: #000000;
+    background: linear-gradient(#f3f3f3, #bfc3c7);
+    color: #000;
     border: 1px solid #7a7f85;
     border-radius: 2px;
     text-decoration: none;
-    font-size: 14px;
+}
+
+/* ===== Visitor Counter ===== */
+.counter {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #eaeaea;
 }
 
 /* ===== Footer ===== */
@@ -185,7 +170,7 @@ footer {
 
 <body>
 
-<!-- XP Splash -->
+<!-- Splash -->
 <div id="splash">
     <div class="splash-box">
         <strong>Loading profile...</strong>
@@ -211,28 +196,19 @@ footer {
     </div>
 
     <h2>💡 Bio</h2>
-    <div class="section">
-        어가나
-    </div>
-
-    <h2>🛠 Blank</h2>
-    <div class="section">
-        <ul>
-            <li>Blank</li>
-        </ul>
-    </div>
+    <div class="section">어가나</div>
 
     <h2>📞 Contact</h2>
     <div class="section">
-        <strong>Email:</strong> jhjch1207@icloud.com<br>
-        <strong>GitHub:</strong><br>
         <a class="xp-button"
            href="https://github.com/us-r1997"
            target="_blank"
            rel="noopener">
            github.com/us-r1997
-        </a><br><br>
-        <strong>Discord:</strong> us_r1997
+        </a>
+        <div class="counter">
+            Visitor count: <span id="count">0001</span>
+        </div>
     </div>
 
     <footer class="section">
@@ -246,6 +222,12 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         document.getElementById("splash").style.display = "none";
     }, 1500);
+
+    let count = localStorage.getItem("visitCount") || 0;
+    count++;
+    localStorage.setItem("visitCount", count);
+    document.getElementById("count").textContent =
+        String(count).padStart(4, "0");
 });
 </script>
 
