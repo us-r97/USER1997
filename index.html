@@ -151,7 +151,7 @@ body {
     border: 1px solid #7a7f85;
 }
 
-/* ===== XP Title ===== */
+/* ===== XP Title with unified icon ===== */
 h2 {
     margin: 0;
     padding: 14px 30px;
@@ -162,8 +162,16 @@ h2 {
     letter-spacing: 0.5px;
 }
 
-.xp-icon { display: inline-block; width: 14px; font-weight: bold; color: #0a246a; }
-ul { list-style: square; margin: 0; padding-left: 20px; }
+.xp-icon { 
+    display: inline-block; 
+    width: 14px; 
+    font-weight: bold; 
+    color: #0a246a;
+    font-size: 14px;
+}
+
+ul { list-style: none; padding-left: 0; }
+li::before { content: ""; } /* 점 제거 */
 a { color: #0a246a; font-weight: bold; }
 
 /* ===== Contact + Footer ===== */
@@ -245,7 +253,8 @@ a { color: #0a246a; font-weight: bold; }
 
     <div class="xp-content" id="content">
         <div class="profile"><img src="profile.jpg"><h1>USER1997</h1></div>
-        <h2><span class="xp-icon">■</span> Information</h2>
+
+        <h2><span class="xp-icon">💠</span> Information</h2>
         <div class="section">
             <ul>
                 <li>Username: USER1997</li>
@@ -254,16 +263,17 @@ a { color: #0a246a; font-weight: bold; }
                 <li>Location: South Korea</li>
             </ul>
         </div>
-        <h2><span class="xp-icon">●</span> Bio</h2>
+
+        <h2><span class="xp-icon">💠</span> Bio</h2>
         <div class="section">어가나</div>
-        <h2><span class="xp-icon">▲</span> Blank</h2>
-        <div class="section"><ul><li>Blank</li></ul></div>
-        <h2><span class="xp-icon">◆</span> Contact</h2>
+
+        <h2><span class="xp-icon">💠</span> Contact</h2>
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
             <strong>GitHub:</strong> <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
             <strong>Discord:</strong> us_r1997
         </div>
+
         <div class="footer-note">© 2026 Made by USER1997</div>
     </div>
 
@@ -344,9 +354,8 @@ refreshBtn.onclick=()=>{
         on=!on;
     },200);
 
-    // XP dark flash effect
     const origFilter = content.style.filter;
-    content.style.filter="brightness(0.6)";
+    content.style.filter="brightness(0.6)"; // 어두워졌다 돌아오기
     setTimeout(()=>{ content.style.filter=origFilter; },400);
 
     setTimeout(()=>{
@@ -373,4 +382,3 @@ closeBtn.onclick=()=>{
 
 </body>
 </html>
-
