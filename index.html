@@ -12,7 +12,6 @@ body {
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
     background: url("background.jpg") center / cover no-repeat fixed;
     color: #000;
-    transition: background 0.15s;
 }
 
 /* ===== Boot Screen ===== */
@@ -20,14 +19,12 @@ body {
     position: fixed;
     inset: 0;
     background: rgba(255,255,255,0.8);
-    color: #000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     font-size: 14px;
-    letter-spacing: 0.5px;
 }
 
 .boot-bar {
@@ -64,7 +61,6 @@ body {
     padding: 4px 8px;
     background: linear-gradient(#0a246a, #3a6ea5);
     color: #fff;
-    font-size: 13px;
     font-weight: bold;
 }
 
@@ -72,11 +68,9 @@ body {
     width: 22px;
     height: 18px;
     margin-left: 2px;
-    font-weight: bold;
     background: linear-gradient(#ffffff, #c6cbd0);
     border: 1px solid #7a7f85;
     cursor: pointer;
-    font-size: 12px;
 }
 
 /* ===== Toolbar ===== */
@@ -107,9 +101,9 @@ body {
 .xp-content {
     padding: 20px 32px;
     background: #cfd3d7;
-    transition: max-height 0.25s ease, opacity 0.15s, filter 0.15s;
     max-height: 3000px;
     overflow: hidden;
+    transition: max-height 0.25s ease, opacity 0.15s, filter 0.15s;
 }
 
 .xp-content.minimized {
@@ -137,45 +131,36 @@ body {
 /* ===== Sections ===== */
 .section {
     padding: 18px 28px;
-    background-color: rgba(85, 90, 95, 0.45);
+    background-color: rgba(85,90,95,0.45);
     margin-bottom: 12px;
     border: 1px solid transparent;
     transition: background 0.15s, border 0.15s;
-    line-height: 1.5;
 }
 
 .section:hover {
-    background-color: rgba(105, 110, 115, 0.65);
+    background-color: rgba(105,110,115,0.65);
     border: 1px solid #7a7f85;
 }
 
-/* ===== Lists ===== */
 ul { list-style: none; padding-left: 0; }
 .no-bullets li { margin-bottom: 4px; }
 
-/* ===== Titles ===== */
 h2 {
     margin: 0;
     padding: 14px 30px;
-    background: linear-gradient(to right,#ffffff 0%,#e6e6e6 25%,#c6cbd0 55%,#aeb4ba 75%,#dfe3e7 100%);
+    background: linear-gradient(to right,#ffffff,#c6cbd0);
     border-bottom: 2px solid #7a7f85;
     font-size: 14px;
-    letter-spacing: 0.5px;
 }
 
-.xp-icon {
-    margin-right: 6px;
-    color: #0a246a;
-}
+.xp-icon { color:#0a246a; margin-right:6px; }
 
-/* ===== Song Code ===== */
 .song-code {
     font-weight: bold;
     color: #0a246a;
-    margin-left: 4px;
 }
 
-/* ===== Contact + Footer ===== */
+/* ===== Contact / Footer ===== */
 .contact-section, .footer-note {
     padding: 20px 28px;
     background-color: rgba(85,90,95,0.45);
@@ -210,15 +195,12 @@ h2 {
     height: 8px;
     background: radial-gradient(#3cff3c, #0f8a0f);
     border: 1px solid #0a5a0a;
+    cursor: pointer;
 }
 
 /* ===== Refresh Blink ===== */
-.blink {
-    animation: blink 0.4s infinite;
-}
-@keyframes blink {
-    50% { opacity: 0.2; }
-}
+.blink { animation: blink 0.4s infinite; }
+@keyframes blink { 50% { opacity: 0.2; } }
 
 /* ===== Exit Overlay ===== */
 #exitOverlay {
@@ -233,6 +215,62 @@ h2 {
     z-index: 10000;
     font-weight: bold;
 }
+
+/* ===== Easter Egg Popup ===== */
+#easterPopup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 12000;
+}
+
+.easter-window {
+    width: 420px;
+    background: #d9dde2;
+    border: 2px solid #7a7f85;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+}
+
+.easter-title {
+    background: linear-gradient(#0a246a,#3a6ea5);
+    color:#fff;
+    padding:4px 8px;
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
+}
+
+.easter-title button {
+    width:22px;
+    height:18px;
+    background:linear-gradient(#fff,#c6cbd0);
+    border:1px solid #7a7f85;
+    cursor:pointer;
+}
+
+.easter-body {
+    padding:26px;
+    background:#cfd3d7;
+    text-align:center;
+    line-height:1.7;
+}
+
+.easter-actions {
+    padding:10px;
+    background:#cfd3d7;
+    text-align:center;
+    border-top:1px solid #7a7f85;
+}
+
+.easter-actions button {
+    padding:4px 16px;
+    background:linear-gradient(#fff,#c6cbd0);
+    border:1px solid #7a7f85;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -240,13 +278,10 @@ h2 {
 
 <div id="bootScreen">
     <div>Starting USER1997...</div>
-    <div class="boot-bar">
-        <div class="boot-progress" id="bootProgress"></div>
-    </div>
+    <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
 </div>
 
 <div class="xp-window" id="xpWindow">
-
     <div class="xp-caption">
         <span>USER1997 - My Profile</span>
         <div class="caption-buttons">
@@ -264,9 +299,8 @@ h2 {
     </div>
 
     <div class="xp-content" id="content">
-
         <div class="profile">
-            <img src="profile.jpg" alt="profile">
+            <img src="profile.jpg">
             <h1>USER1997</h1>
         </div>
 
@@ -318,7 +352,7 @@ h2 {
         <h2><span class="xp-icon">💠</span>Contact</h2>
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
-            <strong>GitHub:</strong> <a href="https://github.com/us-r1997">github.com/us-r1997</a><br>
+            <strong>GitHub:</strong> github.com/us-r1997<br>
             <strong>Discord:</strong> us_r1997
         </div>
 
@@ -337,104 +371,111 @@ h2 {
 
 <div id="exitOverlay">Saving settings...</div>
 
+<!-- Easter Egg -->
+<div id="easterPopup">
+    <div class="easter-window">
+        <div class="easter-title">
+            <span>System Message</span>
+            <button id="easterClose">×</button>
+        </div>
+        <div class="easter-body">
+            수 없이 많은 별들중에서<br>
+            당신을 만날 수 있는건<br>
+            결코 우연이라 할 수 없어
+        </div>
+        <div class="easter-actions">
+            <button id="easterOk">확인</button>
+        </div>
+    </div>
+</div>
+
 <script>
-/* ===== DOM Cache ===== */
-const addressBar   = document.getElementById("addressBar");
-const bootScreen   = document.getElementById("bootScreen");
-const bootProgress = document.getElementById("bootProgress");
-const xpWindow     = document.getElementById("xpWindow");
-const content      = document.getElementById("content");
-const led          = document.getElementById("led");
-const statusText   = document.getElementById("statusText");
-const onlineTime   = document.getElementById("onlineTime");
-const clock        = document.getElementById("clock");
-const minBtn       = document.getElementById("minBtn");
-const maxBtn       = document.getElementById("maxBtn");
-const refreshBtn   = document.getElementById("refreshBtn");
-const closeBtn     = document.getElementById("closeBtn");
-const exitOverlay  = document.getElementById("exitOverlay");
+const addressBar=document.getElementById("addressBar");
+const bootScreen=document.getElementById("bootScreen");
+const bootProgress=document.getElementById("bootProgress");
+const xpWindow=document.getElementById("xpWindow");
+const content=document.getElementById("content");
+const led=document.getElementById("led");
+const statusText=document.getElementById("statusText");
+const onlineTime=document.getElementById("onlineTime");
+const clock=document.getElementById("clock");
+const minBtn=document.getElementById("minBtn");
+const maxBtn=document.getElementById("maxBtn");
+const refreshBtn=document.getElementById("refreshBtn");
+const closeBtn=document.getElementById("closeBtn");
+const exitOverlay=document.getElementById("exitOverlay");
 
-addressBar.textContent = location.href;
+const easterPopup=document.getElementById("easterPopup");
+const easterClose=document.getElementById("easterClose");
+const easterOk=document.getElementById("easterOk");
 
-/* ===== Boot ===== */
-let p = 0;
-const boot = setInterval(() => {
-    p += 10;
-    bootProgress.style.width = p + "%";
-    if (p >= 100) {
+addressBar.textContent=location.href;
+
+/* Boot */
+let p=0;
+const boot=setInterval(()=>{
+    p+=10;
+    bootProgress.style.width=p+"%";
+    if(p>=100){
         clearInterval(boot);
-        bootScreen.style.display = "none";
-        xpWindow.style.display = "block";
-        startOnlineCounter();
+        bootScreen.style.display="none";
+        xpWindow.style.display="block";
+        startOnline();
     }
-}, 150);
+},150);
 
-/* ===== Online Counter ===== */
-let onlineInterval, onlineStart;
-function startOnlineCounter() {
-    onlineStart = Date.now();
-    if (onlineInterval) clearInterval(onlineInterval);
-    onlineInterval = setInterval(() => {
-        const s = Math.floor((Date.now() - onlineStart) / 1000);
-        const m = String(Math.floor(s / 60)).padStart(2, "0");
-        const sec = String(s % 60).padStart(2, "0");
-        onlineTime.textContent = `Online: ${m}:${sec}`;
-    }, 1000);
+/* Online */
+let start;
+function startOnline(){
+    start=Date.now();
+    setInterval(()=>{
+        const s=Math.floor((Date.now()-start)/1000);
+        const m=String(Math.floor(s/60)).padStart(2,"0");
+        const sec=String(s%60).padStart(2,"0");
+        onlineTime.textContent=`Online: ${m}:${sec}`;
+    },1000);
 }
 
-/* ===== Clock ===== */
-setInterval(() => {
-    const d = new Date();
-    clock.textContent =
-        String(d.getHours()).padStart(2, "0") + ":" +
-        String(d.getMinutes()).padStart(2, "0");
-}, 1000);
+/* Clock */
+setInterval(()=>{
+    const d=new Date();
+    clock.textContent=
+        String(d.getHours()).padStart(2,"0")+":"+
+        String(d.getMinutes()).padStart(2,"0");
+},1000);
 
-/* ===== Min / Max ===== */
-let minimized = false;
-minBtn.onclick = () => {
-    if (!minimized) {
-        content.classList.add("minimized");
-        minimized = true;
-    }
-};
-maxBtn.onclick = () => {
-    if (minimized) {
-        content.classList.remove("minimized");
-        minimized = false;
-    }
-};
+/* Min / Max */
+let minimized=false;
+minBtn.onclick=()=>{ if(!minimized){content.classList.add("minimized");minimized=true;} };
+maxBtn.onclick=()=>{ if(minimized){content.classList.remove("minimized");minimized=false;} };
 
-/* ===== Refresh ===== */
-function xpRefresh() {
-    statusText.textContent = "Refreshing...";
-    onlineStart = Date.now();
+/* Refresh */
+refreshBtn.onclick=()=>{
+    statusText.textContent="Refreshing...";
+    start=Date.now();
     led.classList.add("blink");
-    content.style.filter = "brightness(0.6)";
-
-    setTimeout(() => {
-        content.style.filter = "";
-    }, 500);
-
-    setTimeout(() => {
+    content.style.filter="brightness(0.6)";
+    setTimeout(()=>content.style.filter="",500);
+    setTimeout(()=>{
         led.classList.remove("blink");
-        statusText.textContent = "Ready";
-    }, 1200);
-}
-refreshBtn.onclick = xpRefresh;
-
-/* ===== Exit ===== */
-closeBtn.onclick = () => {
-    exitOverlay.style.display = "flex";
-    exitOverlay.textContent = "Saving settings...";
-    setTimeout(() => {
-        exitOverlay.textContent = "Shutting down...";
-    }, 1200);
-    setTimeout(() => {
-        exitOverlay.textContent = "";
-        exitOverlay.style.background = "#000";
-    }, 2400);
+        statusText.textContent="Ready";
+    },1200);
 };
+
+/* Exit */
+closeBtn.onclick=()=>{
+    exitOverlay.style.display="flex";
+    exitOverlay.textContent="Saving settings...";
+    setTimeout(()=>exitOverlay.textContent="Shutting down...",1200);
+    setTimeout(()=>{
+        exitOverlay.textContent="";
+        exitOverlay.style.background="#000";
+    },2400);
+};
+
+/* Easter Egg */
+led.onclick=()=>{ easterPopup.style.display="flex"; };
+easterClose.onclick=easterOk.onclick=()=>{ easterPopup.style.display="none"; };
 </script>
 
 </body>
