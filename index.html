@@ -360,13 +360,17 @@ function startOnlineCounter(){
     },1000);
 }
 
-/* Visitor Counter */
+<!-- Visitor Counter -->
+<script>
 function updateVisitor(){
-    let v = localStorage.getItem("visitors");
-    v = v ? parseInt(v)+1 : 1;
-    localStorage.setItem("visitors", v);
-    visitorCount.textContent = `Visitors: ${String(v).padStart(5,"0")}`;
+    // countapi.xyz 키: user1997-profile / visitors
+    fetch('https://api.countapi.xyz/hit/user1997-profile/visitors')
+        .then(res => res.json())
+        .then(data => {
+            visitorCount.textContent = `Visitors: ${String(data.value).padStart(5,"0")}`;
+        });
 }
+</script>
 
 /* Clock */
 setInterval(()=>{
@@ -422,5 +426,6 @@ closeBtn.onclick=()=>{
 
 </body>
 </html>
+
 
 
