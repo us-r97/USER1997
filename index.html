@@ -173,15 +173,16 @@ h2 {
     color: #0a246a;
 }
 
-/* ===== Contact ===== */
-.contact-section {
+/* ===== Contact / Footer ===== */
+.contact-section, .footer-note {
     padding: 20px 28px;
     background-color: rgba(85,90,95,0.45);
     border: 1px solid transparent;
+    transition: background 0.15s, border 0.15s;
     line-height: 1.6;
 }
 
-.contact-section:hover {
+.contact-section:hover, .footer-note:hover {
     background-color: rgba(105,110,115,0.65);
     border: 1px solid #7a7f85;
 }
@@ -196,18 +197,6 @@ h2 {
 .section a:hover {
     text-decoration: underline;
     color: #003399;
-}
-
-/* ===== Footer ===== */
-.footer-note {
-    padding: 20px 28px;
-    background-color: rgba(85,90,95,0.45);
-    border: 1px solid transparent;
-}
-
-.footer-note:hover {
-    background-color: rgba(105,110,115,0.65);
-    border: 1px solid #7a7f85;
 }
 
 /* ===== Status Bar ===== */
@@ -234,36 +223,295 @@ h2 {
     border: 1px solid #0a5a0a;
     cursor: pointer;
 }
+
+.blink { animation: blink 0.4s infinite; }
+@keyframes blink { 50% { opacity: 0.2; } }
+
+/* ===== Exit Overlay ===== */
+#exitOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-weight: bold;
+}
+
+/* ===== Easter Egg Popup ===== */
+#easterPopup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 12000;
+}
+
+.easter-window {
+    width: 420px;
+    background: #d9dde2;
+    border: 2px solid #7a7f85;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+}
+
+.easter-title {
+    background: linear-gradient(#0a246a,#3a6ea5);
+    color:#fff;
+    padding:4px 8px;
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
+}
+
+.easter-title button {
+    width:22px;
+    height:18px;
+    background:linear-gradient(#fff,#c6cbd0);
+    border:1px solid #7a7f85;
+    cursor:pointer;
+}
+
+.easter-body {
+    padding:26px;
+    background:#cfd3d7;
+    text-align:center;
+    line-height:1.7;
+}
+
+.easter-actions {
+    padding:10px;
+    background:#cfd3d7;
+    text-align:center;
+    border-top:1px solid #7a7f85;
+}
+
+.easter-actions button {
+    padding:4px 16px;
+    background:linear-gradient(#fff,#c6cbd0);
+    border:1px solid #7a7f85;
+    cursor:pointer;
+}
 </style>
 </head>
 
 <body>
-
 <div id="bootScreen">
     <div>Starting USER1997...</div>
     <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
 </div>
 
 <div class="xp-window" id="xpWindow">
-<div class="xp-content">
+    <div class="xp-caption">
+        <span>USER1997 - My Profile</span>
+        <div class="caption-buttons">
+            <button id="minBtn">_</button>
+            <button id="maxBtn">□</button>
+            <button id="closeBtn">×</button>
+        </div>
+    </div>
 
-<h2><span class="xp-icon">💠</span>Current Electronics</h2>
-<div class="section">
-<ul>
-<li>Xiaomi Gaming Monitor G27i (Two monitors)</li>
-<li>Xiaomi Desktop Speaker</li>
-<li>Xiaomi Computer Monitor Light Bar</li>
-<li>Xiaomi 12 Pro</li>
-<li>Xiaomi 5-in-1 Type-C Hub</li>
-<li>Apple iPhone 16 Plus</li>
-<li>Apple AirPods 4</li>
-<li>Keychron K6 Pro</li>
-<li>Razer DeathAdder V2 X HyperSpeed</li>
-</ul>
+    <div id="topbar">
+        <div class="top-btn">◀</div>
+        <div class="top-btn">▶</div>
+        <div class="top-btn" id="refreshBtn">⟳</div>
+        <div class="address-bar" id="addressBar"></div>
+    </div>
+
+    <div class="xp-content" id="content">
+
+        <div class="profile">
+            <img src="profile.jpg">
+            <h1>USER1997</h1>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>Status</h2>
+        <div class="section">Let's Remix Techno Club</div>
+
+        <h2><span class="xp-icon">💠</span>Bio</h2>
+        <div class="section">
+            <ul>
+                <li><strong>Username:</strong> USER1997</li>
+                <li><strong>Interests:</strong> Electronics, 90s Korean techno music, handsome Korean boys</li>
+                <li><strong>Favorite brands:</strong> Xiaomi, Kumyoung, Microsoft</li>
+                <li><strong>Languages:</strong> Korean, English, Chinese</li>
+                <li><strong>Location:</strong> South Korea</li>
+                <li><strong>Favorite Singers:</strong> Kwon Soyoung, Yoo Chaeyoung, Uhm Junghwa</li>
+            </ul>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>Current Electronics</h2>
+        <div class="section">
+            <ul>
+                <li>Xiaomi Gaming Monitor G27i (Two monitors)</li>
+                <li>Xiaomi Desktop Speaker</li>
+                <li>Xiaomi Computer Monitor Light Bar</li>
+                <li>Xiaomi 12 Pro</li>
+                <li>Xiaomi 5-in-1 Type-C Hub</li>
+                <li>Apple iPhone 16 Plus</li>
+                <li>Apple AirPods 4</li>
+                <li>Keychron K6 Pro</li>
+                <li>Razer DeathAdder V2 X HyperSpeed</li>
+            </ul>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>My Kumyoung karaoke machine</h2>
+        <div class="section">
+            <ul>
+                <li>CHORUS HD 100S</li>
+                <li>KMS-160/N</li>
+            </ul>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>Favorite Songs (Kumyoung)</h2>
+        <div class="section">
+            <ul>
+                <li>Techno Club Vol.1 <span class="song-code">(97100)</span></li>
+                <li>Techno Club Vol.2 <span class="song-code">(97101)</span></li>
+                <li>Techno Club Vol.3 <span class="song-code">(97102)</span></li>
+                <li>Techno Club Vol.4 <span class="song-code">(97103)</span></li>
+                <li>Techno Club Vol.5 <span class="song-code">(97104)</span></li>
+                <li>Techno Club Vol.6 <span class="song-code">(97105)</span></li>
+                <li>Techno Club Vol.7 <span class="song-code">(97106)</span></li>
+                <li>(<a href="https://youtu.be/Df3MYsOxqvY?si=F7HukmBlhpXCf4TO" target="_blank">▶ YouTube</a>)</li>
+                <li>Kwon Soyoung – Choice of Cinderella <span class="song-code">(6060)</span></li>
+                <li>Yoo Chaeyoung – Emotion <span class="song-code">(6061)</span></li>
+                <li>Uhm Junghwa – Poison <span class="song-code">(5549)</span></li>
+            </ul>
+        </div>
+
+        <h2><span class="xp-icon">💠</span>Contact</h2>
+        <div class="contact-section">
+            <strong>Email:</strong> jhjch1207@icloud.com<br>
+            <strong>GitHub:</strong> <a href="https://github.com/us-r1997" target="_blank">github.com/us-r1997</a><br>
+            <strong>Discord:</strong> us_r1997
+        </div>
+
+        <div class="footer-note">© 2026 Made by USER1997</div>
+
+    </div>
+
+    <div class="xp-status">
+        <div class="status-left">
+            <div class="status-led" id="led"></div>
+            <span id="statusText">Ready</span>
+            <span id="onlineTime"></span>
+        </div>
+        <span id="clock"></span>
+    </div>
 </div>
 
+<div id="exitOverlay">Saving settings...</div>
+
+<div id="easterPopup">
+    <div class="easter-window">
+        <div class="easter-title">
+            <span>System Message</span>
+            <button id="easterClose">×</button>
+        </div>
+        <div class="easter-body">
+            수 없이 많은 별들중에서<br>
+            당신을 만날 수 있는건<br>
+            결코 우연이라 할 수 없어
+        </div>
+        <div class="easter-actions">
+            <button id="easterOk">확인</button>
+        </div>
+    </div>
 </div>
-</div>
+
+<script>
+const addressBar=document.getElementById("addressBar");
+const bootScreen=document.getElementById("bootScreen");
+const bootProgress=document.getElementById("bootProgress");
+const xpWindow=document.getElementById("xpWindow");
+const content=document.getElementById("content");
+const led=document.getElementById("led");
+const statusText=document.getElementById("statusText");
+const onlineTime=document.getElementById("onlineTime");
+const clock=document.getElementById("clock");
+const minBtn=document.getElementById("minBtn");
+const maxBtn=document.getElementById("maxBtn");
+const refreshBtn=document.getElementById("refreshBtn");
+const closeBtn=document.getElementById("closeBtn");
+const exitOverlay=document.getElementById("exitOverlay");
+
+const easterPopup=document.getElementById("easterPopup");
+const easterClose=document.getElementById("easterClose");
+const easterOk=document.getElementById("easterOk");
+
+addressBar.textContent=location.href;
+
+/* Boot */
+let p=0;
+const boot=setInterval(()=>{
+    p+=10;
+    bootProgress.style.width=p+"%";
+    if(p>=100){
+        clearInterval(boot);
+        bootScreen.style.display="none";
+        xpWindow.style.display="block";
+        startOnline();
+    }
+},150);
+
+/* Online */
+let start;
+function startOnline(){
+    start=Date.now();
+    setInterval(()=>{
+        const s=Math.floor((Date.now()-start)/1000);
+        const m=String(Math.floor(s/60)).padStart(2,"0");
+        const sec=String(s%60).padStart(2,"0");
+        onlineTime.textContent=`Online: ${m}:${sec}`;
+    },1000);
+}
+
+/* Clock */
+setInterval(()=>{
+    const d=new Date();
+    clock.textContent=
+        String(d.getHours()).padStart(2,"0")+":"+
+        String(d.getMinutes()).padStart(2,"0");
+},1000);
+
+/* Min / Max */
+let minimized=false;
+minBtn.onclick=()=>{ if(!minimized){content.classList.add("minimized");minimized=true;} };
+maxBtn.onclick=()=>{ if(minimized){content.classList.remove("minimized");minimized=false;} };
+
+/* Refresh */
+refreshBtn.onclick=()=>{
+    statusText.textContent="Refreshing...";
+    start=Date.now();
+    led.classList.add("blink");
+    content.style.filter="brightness(0.6)";
+    setTimeout(()=>content.style.filter="",500);
+    setTimeout(()=>{
+        led.classList.remove("blink");
+        statusText.textContent="Ready";
+    },1200);
+};
+
+/* Exit */
+closeBtn.onclick=()=>{
+    exitOverlay.style.display="flex";
+    exitOverlay.textContent="Saving settings...";
+    setTimeout(()=>exitOverlay.textContent="Shutting down...",1200);
+    setTimeout(()=>{
+        exitOverlay.textContent="";
+        exitOverlay.style.background="#000";
+    },2400);
+};
+
+/* Easter Egg */
+led.onclick=()=>{ easterPopup.style.display="flex"; };
+easterClose.onclick=easterOk.onclick=()=>{ easterPopup.style.display="none"; };
+</script>
 
 </body>
 </html>
