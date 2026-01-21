@@ -142,8 +142,18 @@ body {
     border: 1px solid #7a7f85;
 }
 
+/* ===== 리스트 간격 통일 ===== */
+.section ul li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.section ul li:last-child {
+    margin-bottom: 0;
+}
+
 ul { list-style: none; padding-left: 0; }
-.no-bullets li { margin-bottom: 4px; }
+.no-bullets li { margin-bottom: 6px; }
 
 h2 {
     margin: 0;
@@ -171,6 +181,17 @@ h2 {
 .contact-section:hover, .footer-note:hover {
     background-color: rgba(105,110,115,0.65);
     border: 1px solid #7a7f85;
+}
+
+/* ===== GitHub Link XP Hover ===== */
+.contact-section a {
+    color: #0a246a;
+    text-decoration: none;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+    color: #003399;
 }
 
 /* ===== Status Bar ===== */
@@ -352,7 +373,10 @@ h2 {
         <h2><span class="xp-icon">💠</span>Contact</h2>
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
-            <strong>GitHub:</strong> github.com/us-r1997<br>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/us-r1997" target="_blank">
+                github.com/us-r1997
+            </a><br>
             <strong>Discord:</strong> us_r1997
         </div>
 
@@ -371,7 +395,6 @@ h2 {
 
 <div id="exitOverlay">Saving settings...</div>
 
-<!-- Easter Egg -->
 <div id="easterPopup">
     <div class="easter-window">
         <div class="easter-title">
