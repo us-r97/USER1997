@@ -142,7 +142,6 @@ body {
     border: 1px solid #7a7f85;
 }
 
-/* ===== List spacing unified ===== */
 .section ul li {
     margin-bottom: 6px;
     line-height: 1.6;
@@ -153,7 +152,6 @@ body {
 }
 
 ul { list-style: none; padding-left: 0; }
-.no-bullets li { margin-bottom: 6px; }
 
 h2 {
     margin: 0;
@@ -183,23 +181,18 @@ h2 {
     border: 1px solid #7a7f85;
 }
 
-/* ===== Contact spacing ===== */
 .contact-section {
     line-height: 1.6;
 }
 
-.contact-section strong {
-    display: inline-block;
-    margin-bottom: 6px;
-}
-
-/* ===== GitHub XP Hover ===== */
-.contact-section a {
+.contact-section a,
+.section a {
     color: #0a246a;
     text-decoration: none;
 }
 
-.contact-section a:hover {
+.contact-section a:hover,
+.section a:hover {
     text-decoration: underline;
     color: #003399;
 }
@@ -229,7 +222,6 @@ h2 {
     cursor: pointer;
 }
 
-/* ===== Refresh Blink ===== */
 .blink { animation: blink 0.4s infinite; }
 @keyframes blink { 50% { opacity: 0.2; } }
 
@@ -352,7 +344,7 @@ h2 {
 
         <h2><span class="xp-icon">💠</span>Current Electronics</h2>
         <div class="section">
-            <ul class="no-bullets">
+            <ul>
                 <li>Xiaomi Gaming Monitor G27i (Two monitors)</li>
                 <li>Xiaomi Desktop Speaker</li>
                 <li>Xiaomi Computer Monitor Light Bar</li>
@@ -366,10 +358,8 @@ h2 {
 
         <h2><span class="xp-icon">💠</span>My Kumyoung karaoke machine</h2>
         <div class="section">
-            <ul class="no-bullets">
-                <li>CHORUS HD 100S</li>
-                <li>KMS-160/N</li>
-            </ul>
+            CHORUS HD 100S<br>
+            KMS-160/N
         </div>
 
         <h2><span class="xp-icon">💠</span>Favorite Songs (Kumyoung)</h2>
@@ -382,6 +372,7 @@ h2 {
                 <li>Techno Club Vol.5 <span class="song-code">(97104)</span></li>
                 <li>Techno Club Vol.6 <span class="song-code">(97105)</span></li>
                 <li>Techno Club Vol.7 <span class="song-code">(97106)</span></li>
+                <li>(<a href="https://youtu.be/Df3MYsOxqvY?si=F7HukmBlhpXCf4TO" target="_blank">▶ YouTube</a>)</li>
                 <li>Kwon Soyoung – Choice of Cinderella <span class="song-code">(6060)</span></li>
                 <li>Yoo Chaeyoung – Emotion <span class="song-code">(6061)</span></li>
                 <li>Uhm Junghwa – Poison <span class="song-code">(5549)</span></li>
@@ -392,9 +383,7 @@ h2 {
         <div class="contact-section">
             <strong>Email:</strong> jhjch1207@icloud.com<br>
             <strong>GitHub:</strong>
-            <a href="https://github.com/us-r1997" target="_blank">
-                github.com/us-r1997
-            </a><br>
+            <a href="https://github.com/us-r1997" target="_blank">github.com/us-r1997</a><br>
             <strong>Discord:</strong> us_r1997
         </div>
 
@@ -445,14 +434,12 @@ const maxBtn=document.getElementById("maxBtn");
 const refreshBtn=document.getElementById("refreshBtn");
 const closeBtn=document.getElementById("closeBtn");
 const exitOverlay=document.getElementById("exitOverlay");
-
 const easterPopup=document.getElementById("easterPopup");
 const easterClose=document.getElementById("easterClose");
 const easterOk=document.getElementById("easterOk");
 
 addressBar.textContent=location.href;
 
-/* Boot */
 let p=0;
 const boot=setInterval(()=>{
     p+=10;
@@ -465,7 +452,6 @@ const boot=setInterval(()=>{
     }
 },150);
 
-/* Online */
 let start;
 function startOnline(){
     start=Date.now();
@@ -477,7 +463,6 @@ function startOnline(){
     },1000);
 }
 
-/* Clock */
 setInterval(()=>{
     const d=new Date();
     clock.textContent=
@@ -485,12 +470,10 @@ setInterval(()=>{
         String(d.getMinutes()).padStart(2,"0");
 },1000);
 
-/* Min / Max */
 let minimized=false;
 minBtn.onclick=()=>{ if(!minimized){content.classList.add("minimized");minimized=true;} };
 maxBtn.onclick=()=>{ if(minimized){content.classList.remove("minimized");minimized=false;} };
 
-/* Refresh */
 refreshBtn.onclick=()=>{
     statusText.textContent="Refreshing...";
     start=Date.now();
@@ -503,7 +486,6 @@ refreshBtn.onclick=()=>{
     },1200);
 };
 
-/* Exit */
 closeBtn.onclick=()=>{
     exitOverlay.style.display="flex";
     exitOverlay.textContent="Saving settings...";
@@ -514,7 +496,6 @@ closeBtn.onclick=()=>{
     },2400);
 };
 
-/* Easter Egg */
 led.onclick=()=>{ easterPopup.style.display="flex"; };
 easterClose.onclick=easterOk.onclick=()=>{ easterPopup.style.display="none"; };
 </script>
